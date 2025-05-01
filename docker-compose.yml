@@ -3,12 +3,15 @@ services:
   backend:
     build:
       context: ./backend
-    env_file:
-      - ../.env
     volumes:
       - shared_data:/app/shared
     ports:
       - "8000:8000"
+    environment:
+      - AZURE_OPENAI_API_KEY=9sQSqpn65N4XshjfnQgK85PTlA3FzkPmmxIhxwOyQjUVr7gdcEMkJQQJ99BBACHYHv6XJ3w3AAABACOG3lSW
+      - AZURE_OPENAI_API_VERSION=2024-10-21
+      - AZURE_OPENAI_ENDPOINT=https://invuniandesai-2.openai.azure.com/
+      
 
   frontend:
     build:
