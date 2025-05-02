@@ -8,6 +8,14 @@ import json
 import pandas as pd
 import ast
 import re
+from pathlib import Path
+
+# Ruta base: carpeta del script actual
+
+
+# Ruta al directorio "back" desde "front"
+
+
 
 # Inicializar el paso
 if "step" not in st.session_state:
@@ -35,7 +43,18 @@ if st.session_state.step == 1:
     st.header("Paso 1: Subir archivos y generar códigos")
 
     uploaded_files = st.file_uploader("Sube archivos .txt", type="txt", accept_multiple_files=True)
-    ruta_destino = "/app/shared/consolidado.txt"
+    
+
+
+# Ruta base: carpeta del script actual
+    BASE_DIR = Path(__file__).resolve().parent
+
+# Ruta al directorio "back" desde "front"
+    back_path = BASE_DIR.parent / "backend"
+
+# Ruta completa del archivo que quieres guardar
+    ruta_destino = back_path / "resultado.txt"
+
 
 
     def consolidar_archivos(files, ruta_destino):

@@ -230,7 +230,7 @@ def run_graph_with_data(pregunta):
     print(pregunta)
     initial_state["questions"]=[pregunta]
     initial_state["validate"]= False
-    load_data_from_txt("/app/shared/consolidado.txt")
+    load_data_from_txt("./consolidado.txt")
 
     memory = MemorySaver()
     graph = builder.compile(checkpointer=memory) # Ejecutar el grafo hasta la validación
