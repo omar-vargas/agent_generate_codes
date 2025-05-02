@@ -89,7 +89,7 @@ elif st.session_state.step == 2:
         data = {"preguntas": str(st.session_state.keywords)}
         with st.spinner("Generando códigos..."):
             st_lottie(lottie_thinking, height=200)
-            response = requests.post("http://backend:8000/generar/",
+            response = requests.post("http://localhost:8000/generar/",
                                      headers={"Content-Type": "application/json"},
                                      data=json.dumps(data))
         if response.status_code == 200:
@@ -144,7 +144,7 @@ elif st.session_state.step == 3:
                 "nuevos_codigos": keywords_codes,
                 "feedback": feedback
             }
-            response = requests.post("http://backend:8000/validar/", json=payload)
+            response = requests.post("http://localhost:8000/validar/", json=payload)
             if response.status_code == 200:
                 st.success("✅ Feedback enviado con éxito.")
                 new_codigos_str = response.json()
