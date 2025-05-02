@@ -54,10 +54,20 @@ prompt_agente_generador_codigos_feedback= {
 
 
 prompt_agente_corrector_codigos= {
-            "role": "system",
-            "content": 'Eres un experto revisor de códigos de evaluación cualitativa. Tu tarea consiste en dado una datos de evaluacion cualitativos y unos codigos iniciales necesito que los compares con la data  y al final des una respuesta con los codigos que tu crees deberian ser los indicados . la respuesta debe darse 2 json, el primer con que contiene la lista del nombre de los códigos finales  un ejemplo del formato de respuesta es {"codigos":["nombre_primero","segundo",....] }. para la segunda lista objetos clave-valor donde cada clave es un código y su valor es la justificación de porque es importante el codgo correspondiente y los ejemplos de donde iria etiquetado ese codigo  en la data,  no añadas comentarios ni antes ni despues es decir [{"codigo": "justicia" ,"justificacion":"porque se escogio seguido", "ejemplos" : "etiquetado  fragmentos en la data donde se podria etiquetar ese codigo"},... ] '
-     
+    "role": "system",
+    "content": (
+        "Eres un experto revisor de códigos de evaluación cualitativa. "
+        "Dado un conjunto de datos cualitativos y unos códigos iniciales, "
+        "tu tarea es validar o corregir los códigos comparándolos con la data. "
+        "Tu respuesta debe ser estrictamente en este formato:\n\n"
+        "PRIMER JSON: lista final de códigos, por ejemplo:\n"
+        '{"codigos": ["nombre_primero", "segundo", "..."]}\n\n'
+        "SEGUNDO JSON: lista de objetos con la justificación y fragmentos de texto para cada código, por ejemplo:\n"
+        '[{"codigo": "justicia", "justificacion": "...", "ejemplos": "..."}]\n\n'
+        "No añadas texto fuera de estos JSONs."
+    )
 }
+
 
 
 # Definir el tipo de estado
@@ -249,7 +259,7 @@ def generar(request: PreguntasRequest):
         preguntas = request.preguntas
         # Ejecutar el grafo con los datos recibidos
         codigos_generados = run_graph_with_data(preguntas)
-        
+        print(codigos_generados)
         # Devuelve los códigos generados
         return {codigos_generados }
     
@@ -286,8 +296,11 @@ def obtener_codigos_primer_agente():
 @app.post("/guardar/")
 async def guardar_archivo(request: ConsolidatedFileRequest):
     try:
-        # Ruta donde guardar el archivo (ajústala según tus necesidades)
-        save_path = os.path.join("ruta/determinada", "consolidated_output.txt")
+        # Crea un nombre de archivo único basado en el contenido
+        snippet = request.content.strip().replace("\n", "_").replace(",", "")[:30]
+        filename = f"output_{snippet}.txt"
+
+        save_path = os.path.join("archivos_guardados", filename)
 
         # Crear el directorio si no existe
         os.makedirs(os.path.dirname(save_path), exist_ok=True)
@@ -301,6 +314,10 @@ async def guardar_archivo(request: ConsolidatedFileRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error al guardar el archivo: {str(e)}")
 
+
+
+
+
 @app.post("/validar/")
 def ajustar(data: ValidacionInput):
     try:
@@ -313,5 +330,27 @@ def ajustar(data: ValidacionInput):
         # Por ahora, retornamos una respuesta de ejemplo
         return answer
     
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+class JustificacionInput(BaseModel):
+    codigos: List[str]
+    data: str
+
+@app.post("/justificacion/")
+def justificar_codigos(input: JustificacionInput):
+    try:
+        state = {
+            "data": [input.data],
+            "codes": [",".join(input.codigos)],
+            "questions": [],
+            "annotations": [],
+        }
+
+        result = validate_data(state)
+        anotaciones = result["annotations"][0]
+
+        return {"anotaciones": anotaciones}
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

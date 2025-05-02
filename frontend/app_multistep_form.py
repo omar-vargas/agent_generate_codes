@@ -53,7 +53,7 @@ if st.session_state.step == 1:
     back_path = BASE_DIR.parent / "backend"
 
 # Ruta completa del archivo que quieres guardar
-    ruta_destino = back_path / "resultado.txt"
+    ruta_destino = back_path / "consolidado.txt"
 
 
 
@@ -138,7 +138,11 @@ elif st.session_state.step == 3:
 
         aprobado = st.checkbox("✅ Estoy satisfecho con los códigos generados")
 
+        if "feedback_list" not in st.session_state:
+            st.session_state["feedback_list"] = []
+
         if st.button("📤 Enviar feedback al agente"):
+            st.session_state["feedback_list"].append(feedback)
             payload = {
                 "aprobado": aprobado,
                 "nuevos_codigos": keywords_codes,
@@ -152,14 +156,71 @@ elif st.session_state.step == 3:
                     new_codigos = [codigo.strip() for codigo in new_codigos_str.split(",") if codigo.strip()]
                     updated_tags = list(set(st.session_state["step3_tags"] + new_codigos))
                     st.session_state["step3_tags"] = updated_tags
-                    st.session_state["tag_input_key"] += 1  # ← fuerza la actualización visual
+                    st.session_state["tag_input_key"] += 1
                     st.experimental_rerun()
                 except Exception as e:
                     st.error(f"Error al procesar la respuesta: {e}")
             else:
                 st.error("❌ Error al enviar feedback.")
 
+        # Solo mostrar el botón de pasar al resumen si el usuario aprueba
+        if aprobado:
+            st.button("✅ Estoy conforme, ver resumen final", on_click=next_step)
+
+
         st.button("⬅️ Anterior", on_click=prev_step)
+
+elif st.session_state.step == 4:
+    st.header("📊 Paso 4: Resumen Final")
+
+    # Mostrar códigos
+    st.subheader("🗂️ Códigos Finales")
+    if "step3_tags" in st.session_state:
+        df_codigos = pd.DataFrame(st.session_state["step3_tags"], columns=["Códigos"])
+        st.dataframe(df_codigos)
+
+        csv_codigos = df_codigos.to_csv(index=False).encode("utf-8")
+        st.download_button("⬇️ Descargar códigos en CSV", data=csv_codigos,
+                           file_name="codigos_finales.csv", mime="text/csv")
+        
+        # Guardar en backend
+        requests.post("http://localhost:8000/guardar/", json={"content": df_codigos.to_csv(index=False)})
+
+    
+    else:
+        st.warning("No hay códigos finales disponibles.")
+
+
+    # Mostrar preguntas
+    st.subheader("📌 Preguntas de Investigación")
+    if "keywords" in st.session_state:
+        preguntas_texto = "\n".join(st.session_state["keywords"])
+        st.text_area("Preguntas", value=preguntas_texto, height=150)
+        st.download_button("⬇️ Descargar preguntas",
+                        data=preguntas_texto, file_name="preguntas_investigacion.txt", mime="text/plain")
+        requests.post("http://localhost:8000/guardar/", json={"content": preguntas_texto})
+
+    else:
+        st.warning("No hay preguntas registradas.")
+
+
+    # Mostrar feedback
+    st.subheader("💬 Feedback del Usuario")
+    if "feedback_list" in st.session_state and st.session_state["feedback_list"]:
+        feedback_texto = "\n\n".join(st.session_state["feedback_list"])
+        st.text_area("Feedback acumulado", value=feedback_texto, height=200)
+        st.download_button("⬇️ Descargar feedback",
+                           data=feedback_texto, file_name="feedback_usuario.txt", mime="text/plain")
+        requests.post("http://localhost:8000/guardar/", json={"content": feedback_texto})
+    else:
+        st.warning("No hay feedback acumulado.")
+
+    # Botón para reiniciar
+    st.subheader("🔁 ¿Deseas iniciar una nueva evaluación?")
+    if st.button("🔄 Reiniciar aplicación"):
+        for key in st.session_state.keys():
+            del st.session_state[key]
+        st.experimental_rerun()
 
     else:
         st.warning("No hay códigos generados. Regresa al paso 2.")
