@@ -53,7 +53,7 @@ if st.session_state.step == 1:
     back_path = BASE_DIR.parent / "backend"
 
 # Ruta completa del archivo que quieres guardar
-    ruta_destino = back_path / "resultado.txt"
+    ruta_destino = back_path / "consolidado.txt"
 
 
 
