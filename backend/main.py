@@ -7,20 +7,24 @@ from typing import List
 from typing import TypedDict,NotRequired
 from langgraph.graph import StateGraph, START, END
 import os
-
+from langchain_openai import AzureChatOpenAI
+from langchain.agents import initialize_agent, AgentType
+from langchain.tools import BaseTool
+from dotenv import load_dotenv
+from openai import AzureOpenAI
 import random
 from typing import Literal
 import ast
 import re
 import json
-
+from fastapi.responses import JSONResponse
 from datetime import datetime
 import uuid
-
+# Cargar las variables de entorno
 load_dotenv()
 
 
-
+# Establecer variables de entorno directamente
 os.environ["OPENAI_API_TYPE"] = "azure"
 os.environ["OPENAI_API_KEY"] = os.getenv("AZURE_OPENAI_API_KEY")
 os.environ["OPENAI_API_BASE"] = os.getenv("AZURE_OPENAI_ENDPOINT")
@@ -29,7 +33,7 @@ os.environ["OPENAI_API_VERSION"] = os.getenv("AZURE_OPENAI_API_VERSION")
 
 
 
-print(" Variables de entorno cargadas correctamente.")
+print("✅ Variables de entorno cargadas correctamente.")
 
 
 
