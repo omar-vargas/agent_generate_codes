@@ -17,8 +17,9 @@ from typing import Literal
 import ast
 import re
 import json
-
-
+from fastapi.responses import JSONResponse
+from datetime import datetime
+import uuid
 # Cargar las variables de entorno
 load_dotenv()
 
@@ -213,14 +214,26 @@ class InputData(BaseModel):
     preguntas: List[str]
 
 
+class PreguntasRequest(BaseModel):
+    preguntas: str
+    session_id: str  # ← nuevo campo
 
 class ValidacionInput(BaseModel):
     aprobado: bool
     nuevos_codigos: List[str] = []
-    feedback: str 
+    feedback: str
+    session_id: str  # ← nuevo campo
 
-class PreguntasRequest(BaseModel):
-    preguntas: str
+class ConsolidatedFileRequest(BaseModel):
+    content: str
+    session_id: str  # ← nuevo campo
+
+
+class Usuario(BaseModel):
+    username: str
+    password: str  # Puedes usar hash si lo deseas más seguro
+
+
 
 class ConsolidatedFileRequest(BaseModel):
     content: str  # Contenido consolidado del texto
@@ -236,32 +249,67 @@ def load_data_from_txt(file_path: str):
 
 
 # Función para ejecutar el grafo
-def run_graph_with_data(pregunta):
+def run_graph_with_data(pregunta: str, session_id: str):
     print(pregunta)
-    initial_state["questions"]=[pregunta]
-    initial_state["validate"]= False
-    load_data_from_txt("./consolidado.txt")
+    file_path = f"./consolidado_{session_id}.txt"
+    load_data_from_txt(file_path)
+
+    initial_state["questions"] = [pregunta]
+    initial_state["validate"] = False
 
     memory = MemorySaver()
-    graph = builder.compile(checkpointer=memory) # Ejecutar el grafo hasta la validación
-    thread_config = {"configurable": {"thread_id": "1"}}
-    
-    result = graph.invoke(initial_state,thread_config)
+    graph = builder.compile(checkpointer=memory)
+    thread_config = {"configurable": {"thread_id": session_id}}
+
+    result = graph.invoke(initial_state, thread_config)
     result_storage['annotations'] = result['annotations']
     return str(result['codes'])
 
 
 # Endpoints de FastAPI
 
+def save_session_data(session_id: str, key: str, value):
+    ruta = f"sessions/session_{session_id}.json"
+    os.makedirs("sessions", exist_ok=True)
+    data = {}
+    if os.path.exists(ruta):
+        with open(ruta, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    data[key] = value
+    with open(ruta, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+def load_session_data(session_id: str):
+    ruta = f"sessions/session_{session_id}.json"
+    if os.path.exists(ruta):
+        with open(ruta, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return {}
+
 @app.post("/generar/")
 def generar(request: PreguntasRequest):
     try:
         preguntas = request.preguntas
-        # Ejecutar el grafo con los datos recibidos
-        codigos_generados = run_graph_with_data(preguntas)
-        print(codigos_generados)
-        # Devuelve los códigos generados
-        return {codigos_generados }
+        session_id = request.session_id
+
+        load_data_from_txt("./consolidado.txt")
+        initial_state["questions"] = [preguntas]
+        initial_state["validate"] = False
+
+        memory = MemorySaver()
+        graph = builder.compile(checkpointer=memory)
+        result = graph.invoke(initial_state, {"configurable": {"thread_id": session_id}})
+
+        save_session_data(session_id, "codes", result["codes"])
+        save_session_data(session_id, "data", initial_state["data"])
+        save_session_data(session_id, "questions", initial_state["questions"])
+
+        return {str(result["codes"])}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -296,42 +344,55 @@ def obtener_codigos_primer_agente():
 @app.post("/guardar/")
 async def guardar_archivo(request: ConsolidatedFileRequest):
     try:
-        # Crea un nombre de archivo único basado en el contenido
-        snippet = request.content.strip().replace("\n", "_").replace(",", "")[:30]
-        filename = f"output_{snippet}.txt"
-
+        session_id = request.session_id
+        os.makedirs("archivos_guardados", exist_ok=True)
+        filename = f"output_{session_id}.txt"
         save_path = os.path.join("archivos_guardados", filename)
 
-        # Crear el directorio si no existe
-        os.makedirs(os.path.dirname(save_path), exist_ok=True)
-
-        # Guardar el contenido en el archivo
-        with open(save_path, "w", encoding="utf-8") as file:
-            file.write(request.content)
+        with open(save_path, "a", encoding="utf-8") as file:
+            file.write(request.content + "\n")
 
         return {"message": "Archivo guardado exitosamente", "path": save_path}
-    
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error al guardar el archivo: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
+@app.post("/login/")
+def login(usuario: Usuario):
+    # Simulación de base de datos de usuarios
+    usuarios_validos = {
+        "omar": "1234",
+        "elsa": "abcd"
+    }
 
+    if usuarios_validos.get(usuario.username) == usuario.password:
+        # Reutilizamos session_id como token para ahora
+        session_id = f"{usuario.username}--{str(uuid.uuid4())}"
+        return {"session_id": session_id, "username": usuario.username}
+    else:
+        raise HTTPException(status_code=401, detail="Usuario o contraseña inválidos")
 
 
 
 @app.post("/validar/")
 def ajustar(data: ValidacionInput):
     try:
+        session_data = load_session_data(data.session_id)
+        data_loaded = session_data.get("data", [])
+        nuevos_codigos = data.nuevos_codigos
+        feedback = data.feedback
 
-        initial_state["codes"]=data.nuevos_codigos
-        
-        answer = call_azure_openai('La data es la siguiente ***'+str(initial_state["data"])+'***'+' los codigos que el usuario establecio ***'+str(initial_state["codes"])+'el feedback que dio el usuario y en lo que deberia enfocarse el generador de codigos es '+str(data.feedback),1)
+        answer = call_azure_openai(
+            f"La data es la siguiente ***{str(data_loaded)}*** los codigos que el usuario establecio ***{str(nuevos_codigos)}*** el feedback que dio el usuario es {feedback}",
+            1
+        )
 
-        # Aquí podrías implementar el ajuste de códigos según el feedback
-        # Por ahora, retornamos una respuesta de ejemplo
+        save_session_data(data.session_id, "codes", nuevos_codigos)
+        save_session_data(data.session_id, "feedback", feedback)
+
         return answer
-    
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
 
 class JustificacionInput(BaseModel):
     codigos: List[str]
@@ -354,3 +415,38 @@ def justificar_codigos(input: JustificacionInput):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+
+@app.get("/historial/{session_id}")
+def obtener_historial(session_id: str):
+    try:
+        # Cargar el archivo de sesión
+        session_path = f"sessions/session_{session_id}.json"
+        if not os.path.exists(session_path):
+            raise HTTPException(status_code=404, detail="No se encontraron datos para esta sesión.")
+
+        with open(session_path, "r", encoding="utf-8") as f:
+            session_data = json.load(f)
+
+        # Cargar el texto consolidado
+        consolidado_path = f"./archivos_guardados/output_{session_id}.txt"
+        texto_consolidado = ""
+        if os.path.exists(consolidado_path):
+            with open(consolidado_path, "r", encoding="utf-8") as f:
+                texto_consolidado = f.read()
+
+        # Obtener timestamp de la sesión
+        timestamp = datetime.fromtimestamp(os.path.getmtime(session_path)).isoformat()
+
+        return JSONResponse(content={
+            "session_id": session_id,
+            "timestamp": timestamp,
+            "preguntas": session_data.get("questions", []),
+            "codigos": session_data.get("codes", []),
+            "feedback": session_data.get("feedback", ""),
+            "texto_consolidado": texto_consolidado
+        }, status_code=200)
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error al obtener historial: {str(e)}")

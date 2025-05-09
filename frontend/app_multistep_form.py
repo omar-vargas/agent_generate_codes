@@ -10,11 +10,7 @@ import ast
 import re
 from pathlib import Path
 
-# Ruta base: carpeta del script actual
-
-
-# Ruta al directorio "back" desde "front"
-
+import uuid
 
 
 # Inicializar el paso
@@ -36,7 +32,55 @@ def load_lottiefile(filepath: str):
 lottie_thinking = load_lottiefile("Animation.json") 
 
 st.set_page_config(page_title="Evaluación cualitativa", page_icon="🧠")
+
+
+if "session_id" not in st.session_state:
+    st.session_state.session_id = str(uuid.uuid4())
+
+import uuid
+import requests
+import streamlit as st
+
+# Inicializar estado de sesión
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
+if "username" not in st.session_state:
+    st.session_state.username = None
+if "session_id" not in st.session_state:
+    st.session_state.session_id = None
+
+# Función para iniciar sesión
+def login(username, password):
+    try:
+        response = requests.post("http://localhost:8000/login/", json={
+            "username": username,
+            "password": password
+        })
+        if response.status_code == 200:
+            data = response.json()
+            st.session_state.logged_in = True
+            st.session_state.username = data["username"]
+            st.session_state.session_id = data["session_id"]
+            st.rerun()  # ← Esto es lo que fuerza avanzar a la siguiente página
+
+        else:
+            st.error("❌ Usuario o contraseña incorrectos.")
+    except Exception as e:
+        st.error(f"Error de conexión: {e}")
+
+if not st.session_state.logged_in:
+    st.title("🔐 Inicio de sesión")
+    with st.form("login_form"):
+        username = st.text_input("Usuario")
+        password = st.text_input("Contraseña", type="password")
+        submitted = st.form_submit_button("Iniciar sesión")
+        if submitted:
+            login(username, password)
+    st.stop()  # Detiene la ejecución hasta que el usuario inicie sesión
+
+
 st.title("🧪 Evaluación Cualitativa Asistida por Agentes")
+st.sidebar.markdown(f"🆔 Session ID: `{st.session_state.session_id}`")
 
 # Paso 1: Subir archivos y generar códigos
 if st.session_state.step == 1:
@@ -51,9 +95,10 @@ if st.session_state.step == 1:
 
 # Ruta al directorio "back" desde "front"
     back_path = BASE_DIR.parent / "backend"
+    session_id = st.session_state.session_id
 
-# Ruta completa del archivo que quieres guardar
-    ruta_destino = back_path / "consolidado.txt"
+    ruta_destino = back_path / f"consolidado_{session_id}.txt"
+
 
 
 
@@ -80,13 +125,16 @@ if st.session_state.step == 1:
         if st.button("➡️ Siguiente"):
             st.session_state.keywords = keywords
             next_step()
+            st.rerun()  # ← importante
+
 
 # Paso 2: Revisión del agente
 elif st.session_state.step == 2:
     st.header("Paso 2: Revisión de códigos por el agente")
 
     if "keywords" in st.session_state:
-        data = {"preguntas": str(st.session_state.keywords)}
+        data = {"preguntas": str(st.session_state.keywords),
+                   "session_id": st.session_state.session_id }
         with st.spinner("Generando códigos..."):
             st_lottie(lottie_thinking, height=200)
             response = requests.post("http://localhost:8000/generar/",
@@ -125,13 +173,46 @@ elif st.session_state.step == 3:
 
         st.subheader("✍️ Edita los códigos sugeridos")
 
+# Campo editable con todos los tags acumulados
         keywords_codes = st_tags(
             label='🗂️ Edita los códigos',
             text='Presiona Enter para agregar más',
             value=st.session_state["step3_tags"],
             maxtags=50,
-            key=f'step3_tags_{st.session_state["tag_input_key"]}'  # ← clave dinámica
+            key=f'step3_tags_{st.session_state["tag_input_key"]}'
         )
+
+        # Vista diferenciada por iteración justo debajo
+        st.markdown("**🎨 Códigos agrupados por feedback:**")
+
+        color_map = ["#00cc66", "#3399ff", "#ff9933", "#cc33cc", "#ff6666"]
+        tag_history = st.session_state.get("tag_history", {})
+
+        for idx, (etiqueta, tags) in enumerate(tag_history.items()):
+            color = color_map[idx % len(color_map)]
+            st.markdown(f"<b>{etiqueta}</b>", unsafe_allow_html=True)
+            tag_line = " ".join([
+                f"<span style='background-color:{color}; padding:6px 10px; border-radius:20px; color:white; margin:4px; display:inline-block'>{tag}</span>"
+                for tag in tags
+            ])
+            st.markdown(tag_line, unsafe_allow_html=True)
+
+
+        st.markdown("**💡 Visualización por iteración:**")
+
+        color_map = ["#00cc66", "#3399ff", "#ff9933", "#cc33cc", "#ff6666"]
+        tag_history = st.session_state.get("tag_history", {})
+
+        if tag_history:
+            for idx, (etiqueta, tags) in enumerate(tag_history.items()):
+                color = color_map[idx % len(color_map)]
+                st.markdown(f"<b>{etiqueta}</b>", unsafe_allow_html=True)
+                tag_line = " ".join([
+                    f"<span style='background-color:{color}; padding:6px 10px; border-radius:20px; color:white; margin:4px; display:inline-block'>{tag}</span>"
+                    for tag in tags
+                ])
+                st.markdown(tag_line, unsafe_allow_html=True)
+
 
         feedback = st.text_area("💬 ¿Qué opinas de los códigos generados?",
                                 placeholder="Ejemplo: Falta énfasis en temas emocionales...")
@@ -146,7 +227,8 @@ elif st.session_state.step == 3:
             payload = {
                 "aprobado": aprobado,
                 "nuevos_codigos": keywords_codes,
-                "feedback": feedback
+                "feedback": feedback,
+                "session_id": st.session_state.session_id
             }
             response = requests.post("http://localhost:8000/validar/", json=payload)
             if response.status_code == 200:
@@ -154,14 +236,24 @@ elif st.session_state.step == 3:
                 new_codigos_str = response.json()
                 try:
                     new_codigos = [codigo.strip() for codigo in new_codigos_str.split(",") if codigo.strip()]
+                    iteracion = st.session_state.get("feedback_round", 1)
+
+                    # Guardamos los códigos por iteración
+                    if "tag_history" not in st.session_state:
+                        st.session_state["tag_history"] = {}
+
+                    st.session_state["tag_history"][f"Iteración {iteracion}"] = new_codigos
+                    st.session_state["feedback_round"] = iteracion + 1
+
+                    # Acumulamos todos
                     updated_tags = list(set(st.session_state["step3_tags"] + new_codigos))
                     st.session_state["step3_tags"] = updated_tags
+
                     st.session_state["tag_input_key"] += 1
-                    st.experimental_rerun()
+                    st.rerun()
                 except Exception as e:
                     st.error(f"Error al procesar la respuesta: {e}")
-            else:
-                st.error("❌ Error al enviar feedback.")
+
 
         # Solo mostrar el botón de pasar al resumen si el usuario aprueba
         if aprobado:
@@ -220,7 +312,7 @@ elif st.session_state.step == 4:
     if st.button("🔄 Reiniciar aplicación"):
         for key in st.session_state.keys():
             del st.session_state[key]
-        st.experimental_rerun()
+        st.rerun()
 
     else:
         st.warning("No hay códigos generados. Regresa al paso 2.")
