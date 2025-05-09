@@ -7,24 +7,20 @@ from typing import List
 from typing import TypedDict,NotRequired
 from langgraph.graph import StateGraph, START, END
 import os
-from langchain_openai import AzureChatOpenAI
-from langchain.agents import initialize_agent, AgentType
-from langchain.tools import BaseTool
-from dotenv import load_dotenv
-from openai import AzureOpenAI
+
 import random
 from typing import Literal
 import ast
 import re
 import json
-from fastapi.responses import JSONResponse
+
 from datetime import datetime
 import uuid
-# Cargar las variables de entorno
+
 load_dotenv()
 
 
-# Establecer variables de entorno directamente
+
 os.environ["OPENAI_API_TYPE"] = "azure"
 os.environ["OPENAI_API_KEY"] = os.getenv("AZURE_OPENAI_API_KEY")
 os.environ["OPENAI_API_BASE"] = os.getenv("AZURE_OPENAI_ENDPOINT")
@@ -33,7 +29,7 @@ os.environ["OPENAI_API_VERSION"] = os.getenv("AZURE_OPENAI_API_VERSION")
 
 
 
-print("✅ Variables de entorno cargadas correctamente.")
+print(" Variables de entorno cargadas correctamente.")
 
 
 
@@ -59,15 +55,13 @@ prompt_agente_corrector_codigos= {
     "content": (
         "Eres un experto revisor de códigos de evaluación cualitativa. "
         "Dado un conjunto de datos cualitativos y unos códigos iniciales, "
-        "tu tarea es validar o corregir los códigos comparándolos con la data. "
-        "Tu respuesta debe ser estrictamente en este formato:\n\n"
-        "PRIMER JSON: lista final de códigos, por ejemplo:\n"
-        '{"codigos": ["nombre_primero", "segundo", "..."]}\n\n'
-        "SEGUNDO JSON: lista de objetos con la justificación y fragmentos de texto para cada código, por ejemplo:\n"
-        '[{"codigo": "justicia", "justificacion": "...", "ejemplos": "..."}]\n\n'
-        "No añadas texto fuera de estos JSONs."
+        "tu tarea es validar o justificar los códigos comparándolos con la data. "
+        "Devuelve una lista JSON de objetos con este formato exacto:\n\n"
+        '[{"codigo": "nombre_del_codigo", "justificacion": "por qué es relevante", "ejemplos": "frases o fragmentos textuales"}]\n\n'
+        "No devuelvas texto antes o después del JSON, ni explicaciones adicionales."
     )
 }
+
 
 
 
@@ -105,10 +99,10 @@ def run_prompt(client, prompt_message: str,role_agent:dict, model: str = "gpt", 
     content = response.choices[0].message.content  # Esto depende de la estructura
 
     return content, tokens
-# Función que llamará al modelo de Azure OpenAI
+
 def call_azure_openai(prompt: str, option:int) -> str:
     try:
-        # Llamar al método run_prompt con el cliente y el mensaje
+       
         if option==0:
             answer, tokens_used = run_prompt(client, prompt, prompt_agente_generador_codigos)
         elif option==1:
@@ -143,7 +137,6 @@ def validate_data(state: State) -> State:
     if "annotations" not in state:
         state["annotations"] = []
 
-    # Corrección del prompt al agente revisor
     answer = call_azure_openai(
         f'La data es la siguiente ***{str(state["data"])}*** los codigos generados fueron ***{str(state["codes"])}***',
         2
@@ -208,6 +201,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 result_storage = {}
+
 # Modelos de datos para los endpoints
 class InputData(BaseModel):
     texto: str
@@ -216,35 +210,34 @@ class InputData(BaseModel):
 
 class PreguntasRequest(BaseModel):
     preguntas: str
-    session_id: str  # ← nuevo campo
+    session_id: str  
 
 class ValidacionInput(BaseModel):
     aprobado: bool
     nuevos_codigos: List[str] = []
     feedback: str
-    session_id: str  # ← nuevo campo
+    session_id: str 
 
 class ConsolidatedFileRequest(BaseModel):
     content: str
-    session_id: str  # ← nuevo campo
+    session_id: str  
 
 
 class Usuario(BaseModel):
     username: str
-    password: str  # Puedes usar hash si lo deseas más seguro
+    password: str  
 
 
 
-class ConsolidatedFileRequest(BaseModel):
-    content: str  # Contenido consolidado del texto
+
 def load_data_from_txt(file_path: str):
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"El archivo {file_path} no existe.")
     
     with open(file_path, "r", encoding="utf-8") as file:
-        content = file.read().strip()  # Lee el contenido del archivo y elimina espacios innecesarios
+        content = file.read().strip() 
     
-    initial_state["data"] = [content]  # Guarda el contenido como una lista de strings
+    initial_state["data"] = [content]  
 
 
 
@@ -292,7 +285,7 @@ def generar(request: PreguntasRequest):
         preguntas = request.preguntas
         session_id = request.session_id
 
-        load_data_from_txt("./consolidado.txt")
+        load_data_from_txt(f"./consolidado_{session_id}.txt")
         initial_state["questions"] = [preguntas]
         initial_state["validate"] = False
 
@@ -317,19 +310,18 @@ def generar(request: PreguntasRequest):
 @app.get("/revisor/")
 def obtener_codigos_primer_agente():
     try:
-        # Acceder al almacenamiento global de resultados
+
         if 'annotations' in result_storage:
             anotaciones = str(result_storage['annotations'])
-            clean_str = anotaciones.strip()[1:-1]  # elimina los corchetes externos y comillas
+            clean_str = anotaciones.strip()[1:-1]  
 
-            indice_corte = clean_str.find('}\n{')  # Buscar dónde termina el primer y empieza el segundo
+            indice_corte = clean_str.find('}\n{')  
 
-            # Paso 2: Separar ambos JSONs correctamente
+
             temas = clean_str[:indice_corte+1].replace("\n", "")
             justificaciones = clean_str[indice_corte+1:].replace("\n", "")
 
-            # Convertir a diccionario
-            
+
             
 
             return  temas,justificaciones
@@ -407,21 +399,16 @@ def justificar_codigos(input: JustificacionInput):
             "questions": [],
             "annotations": [],
         }
-
         result = validate_data(state)
         anotaciones = result["annotations"][0]
-
         return {"anotaciones": anotaciones}
-
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
-
 
 @app.get("/historial/{session_id}")
 def obtener_historial(session_id: str):
     try:
-        # Cargar el archivo de sesión
+
         session_path = f"sessions/session_{session_id}.json"
         if not os.path.exists(session_path):
             raise HTTPException(status_code=404, detail="No se encontraron datos para esta sesión.")
@@ -429,14 +416,14 @@ def obtener_historial(session_id: str):
         with open(session_path, "r", encoding="utf-8") as f:
             session_data = json.load(f)
 
-        # Cargar el texto consolidado
+
         consolidado_path = f"./archivos_guardados/output_{session_id}.txt"
         texto_consolidado = ""
         if os.path.exists(consolidado_path):
             with open(consolidado_path, "r", encoding="utf-8") as f:
                 texto_consolidado = f.read()
 
-        # Obtener timestamp de la sesión
+
         timestamp = datetime.fromtimestamp(os.path.getmtime(session_path)).isoformat()
 
         return JSONResponse(content={
