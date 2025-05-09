@@ -357,7 +357,9 @@ def login(usuario: Usuario):
     # Simulación de base de datos de usuarios
     usuarios_validos = {
         "omar": "1234",
-        "elsa": "abcd"
+        "elsa": "abcd",
+        "admin":"admin",
+        "admin1":"admin"
     }
 
     if usuarios_validos.get(usuario.username) == usuario.password:
