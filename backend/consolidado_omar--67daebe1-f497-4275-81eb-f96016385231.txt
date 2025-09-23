@@ -1,0 +1,600 @@
+
+
+-- Inicio del archivo 1 --
+
+INVESTIGADOR: Bienvenidos todos, gracias por estar aquí. Empecemos con la primera categoría: uso actual de la IAG. ¿Ustedes usan IAG para preparar o durante sus clases?
+
+PROFESOR (Departamento de Matemáticas) P1: Pues sí, he empezado a integrar herramientas de IAG en mis clases, especialmente para generar ejercicios personalizados. Hay algo muy práctico en eso.
+
+PROFESOR (Facultad de Educación) P2: Igual, pero tengo el dilema de cómo verificar que los estudiantes realmente entendieron el tema. A veces, la IAG les ayuda a generar respuestas, pero no necesariamente a comprender.
+
+ADMINISTRATIVO (Escuela de Administración) P1: Yo tengo la impresión de que quienes más usan IAG son los profesores jóvenes. ¿Están de acuerdo con eso?
+
+PROFESOR (Facultad de Derecho) P3: Sí, pero eso también depende del área. En derecho, usamos esas herramientas, pero suelen ser más escépticos sobre su efectividad. 
+
+INVESTIGADOR: Interesante. Siguiendo con la pregunta, ¿quiénes son los usuarios de la IAG en sus contextos?
+
+PROFESOR (Facultad de Humanidades) P4: Principalmente los docentes, pero los estudiantes han comenzado a tomar la delantera. A veces, ellos saben más que nosotros sobre estas herramientas.
+
+PROFESOR (Departamento de Lenguas y Cultura) P5: Definitivamente. También he notado que algunos estudiantes se sienten más cómodos usando IAG para proyectos creativos, como escritura de ensayos o creación de contenido audiovisual.
+
+ADMINISTRATIVO (Facultad de Medicina) P2: Eso me preocupa un poco. La dependencia de estas herramientas podría llevar a que pierdan habilidades fundamentales, como el pensamiento crítico.
+
+INVESTIGADOR: Eso es un punto válido. Hablemos un poco más sobre enseñanza y aprendizaje. ¿Qué herramientas y versiones de IAG usan en su práctica educativa? ¿Con qué frecuencia? ¿Observan diferencias entre versiones?
+
+PROFESOR (Facultad de Artes) P6: Yo uso herramientas como ChatGPT y DALL-E. Los empleo casi semanalmente para mis clases. 
+
+PROFESOR (Departamento de Música) P7: Yo también, pero he notado que las versiones avanzadas ofrecen más opciones creativas.
+
+PROFESOR (Facultad de Derecho) P3: En mi caso, uso versiones más simples de herramientas de IAG, ya que no quiero complicarles la vida a los estudiantes con funciones que no comprenden.
+
+PROFESOR (Facultad de Educación) P2: La frecuencia también depende de la confianza que tengamos en la herramienta. A veces dudo de la veracidad de la información que generan.
+
+INVESTIGADOR: ¿Cree que la edad y las habilidades digitales influyen en el uso de IAG en la práctica educativa? ¿Cómo?
+
+PROFESOR (Departamento de Química) P8: Totalmente. Los docentes más jóvenes tienden a ser más receptivos y creativos en su uso, a menudo lo manejan mejor.
+
+PROFESOR (Facultad de Educación) P2: Y también, hay que considerar que algunas personas mayores han experimentado una cultura educativa más tradicional, lo que las hace reticentes a adoptar estas tecnologías.
+
+PROFESOR (Facultad de Medicina) P2: Es un reto porque el avance tecnológico es muy rápido y algunos docentes simplemente no tienen las habilidades sueltas para seguir el ritmo.
+
+INVESTIGADOR: Eso nos lleva a la pregunta sobre qué tipo de formación o apoyo necesitan los docentes para integrar la IAG de forma efectiva y responsable.
+
+PROFESOR (Facultad de Humanidades) P4: Necesitamos talleres interactivos, donde podamos ver ejemplos reales de cómo usar la IAG sin perjudicar a nuestros estudiantes.
+
+PROFESOR (Escuela de Gobierno) P9: Estoy de acuerdo. La formación necesita ser práctica y relevante, pero también ética. Debemos discutir las implicaciones sociales.
+
+ADMINISTRATIVO (Facultad de Ingeniería) P1: Y también debería haber un componente de comunidad, donde los docentes puedan compartir sus experiencias y aprendizajes sobre estas herramientas.
+
+INVESTIGADOR: ¿Cómo podría la IAG empoderar a docentes y estudiantes?
+
+PROFESOR (Facultad de Artes) P6: Bueno, para los estudiantes, podría darles más autonomía. Pueden crear proyectos que quizás no se atreverían a hacer en un entorno más tradicional.
+
+PROFESOR (Facultad de Economía) P10: Para los docentes, permite diversificar su enseñanza. Con IAG, pueden diseñar clases más interactivas y personalizadas.
+
+PROFESOR (Departamento de Psicología) P11: Pero eso debe hacerse con cuidado; la IAG no debe reemplazar el rol del docente, sino complementarlo.
+
+INVESTIGADOR: Pasemos a la ética en la enseñanza. ¿Cuáles son los mayores retos que plantea la IAG para los procesos educativos?
+
+PROFESOR (Facultad de Medicina) P2: Uno de los mayores retos es la desinformación. Los estudiantes pueden confiar ciegamente en lo que la IAG genera.
+
+PROFESOR (Facultad de Derecho) P3: Totalmente. Además, no estamos preparados para evaluar el contenido que producen, especialmente en campos donde la precisión es vital.
+
+PROFESOR (Escuela de Gobierno) P9: También está el hecho de que algunos estudiantes podrían sentirse tentados a hacer trampa porque una herramienta les facilita el trabajo.
+
+INVESTIGADOR: ¿Qué retos éticos surgen con el uso de IAG en su disciplina?
+
+PROFESOR (Departamento de Química) P8: En mi caso, me preocupa la integridad académica. Si un estudiante presenta un trabajo generado por IAG como propio, no hay crecimiento.
+
+PROFESOR (Facultad de Educación) P2: Estoy de acuerdo. Además, debemos estar atentos a que la inclusión de IAG no refuerce sesgos o estereotipos existentes.
+
+ADMINISTRATIVO (Escuela de Administración) P1: Y eso nos lleva a preguntarnos quién podría verse perjudicado con el uso de la IAG. ¿Y quién podría beneficiarse?
+
+PROFESOR (Facultad de Humanidades) P4: Los estudiantes tal vez sean los más perjudicados si dependen demasiado de la tecnología, pero aquellos que se adapten pueden beneficiarse enormemente.
+
+PROFESOR (Facultad de Medicina) P2: En términos de beneficios, los docentes podrían acceder a recursos más desarrollados y así enriquecer sus clases.
+
+INVESTIGADOR: Alguien debería controlar el uso de la IAG en la educación. ¿Quién y cómo?
+
+PROFESOR (Facultad de Derecho) P3: Eso debería estar en manos de una entidad reguladora que sepa de educación y tecnología. Necesitan establecer principios claros.
+
+PROFESOR (Facultad de Educación) P2: Y no solo deberían estar pendientes del uso de la IAG en el aula, sino de los materiales que produce para asegurarse de que son útiles y éticos.
+
+INVESTIGADOR: ¿Cómo influyen la privacidad en línea y la seguridad de los datos?
+
+PROFESOR (Departamento de Psicología) P11: La privacidad es un tema clave. Los estudiantes podrían no ser conscientes de que sus datos están siendo recogidos cuando usan estas herramientas.
+
+PROFESOR (Facultad de Medicina) P2: También debemos tener cuidado con lo que compartimos. Hay una delgada línea entre la innovación y la ética.
+
+INVESTIGADOR: Y por último, ¿cuáles son los dilemas éticos más relevantes en su campo?
+
+PROFESOR (Facultad de Artes) P6: Creo que uno de los dilemas es cómo citar correctamente el contenido generado por IAG. No es obra del estudiante, es complicado.
+
+PROFESOR (Facultad de Humanidades) P4: Y una cuestión de justicia. No todos los estudiantes tienen acceso a las mismas herramientas, lo que puede amplificar las desigualdades.
+
+PROFESOR (Departamento de Química) P8: En definitiva, el desafío radica en encontrar un equilibrio entre utilizar la IAG y mantener la integridad educativa.
+
+INVESTIGADOR: Gracias a todos por sus aportes. Creo que hemos tocado muchos aspectos importantes y me gustaría seguir reflexionando sobre esto en futuras reuniones.
+
+-- Fin del archivo 1 --
+
+
+
+-- Inicio del archivo 2 --
+
+INVESTIGADOR: Bienvenidos a todos. Me gustaría empezar con la primera categoría, que es el uso actual de la IAG. ¿Ustedes usan IAG para preparar o durante sus clases?
+
+PROFESOR (Departamento de Psicología) P1: Yo personalmente no la uso mucho en las clases, pero he visto a algunos colegas que la aplican para generar contenido para presentaciones. ¿Es eso a lo que se refieren?
+
+PROFESOR (Facultad de Educación) P2: Sí, exactamente. En mi caso, he empezado a usarla para crear material didáctico, como ejemplos de análisis. Se vuelve interesante, pero creo que aún es un uso limitado.
+
+ADMINISTRATIVO (Escuela de Gobierno) PE1: En nuestra área, los estudiantes la utilizan para investigar y generar textos. Sin embargo, la mayoría no sabe bien cómo usarla de manera responsable.
+
+PROFESOR (Facultad de Derecho) P3: Eso es un punto clave. La responsabilidad en el uso de estos recursos es urgente. Pero, ¿quiénes son exactamente los usuarios de la IAG en sus contextos?
+
+PROFESOR (Facultad de Humanidades) P4: Yo diría que, aunque los estudiantes son los principales usuarios, también se está comenzando a ver un interés importante por parte de los docentes para incorporarla en su metodología.
+
+PROFESOR (Departamento de Matemáticas) P5: Totalmente de acuerdo. En mi experiencia, los alumnos pueden automatizar tareas básicas pero no entienden el trasfondo conceptual, lo que me preocupa.
+
+INVESTIGADOR: Muy interesante. Pasemos a la siguiente categoría: Enseñanza y aprendizaje. ¿Qué herramientas y versiones de IAG usan en su práctica educativa? ¿Con qué frecuencia? ¿Observan diferencias entre versiones?
+
+PROFESOR (Facultad de Medicina) P6: Yo he estado utilizando herramientas como ChatGPT y algunos sistemas de automatización de tareas en línea. Lo uso frecuentemente, especialmente para conceptos difíciles de explicar.
+
+PROFESOR (Facultad de Artes) P7: En mi caso, utilizo IAG para crear guiones y conceptos. Debo decir que he notado que las versiones más nuevas son más precisas y comprensivas que las anteriores.
+
+PROFESOR (Departamento de Música) P8: Es curioso que mencionen eso. A veces creo que las versiones más antiguas tienen un encanto específico, aunque menos eficiente en comparación con las nuevas.
+
+ADMINISTRATIVO (Facultad de Economía) PE2: La frecuencia con la que se usan podría ser un problema. Algunos docentes se sienten abrumados por la rapidez con que evoluciona la tecnología.
+
+PROFESOR (Escuela de Administración) P9: Eso me lleva a una pregunta importante: ¿Cree que la edad y las habilidades digitales influyen en el uso de IAG en la práctica educativa? ¿Cómo?
+
+PROFESOR (Departamento de Lenguas y Cultura) P10: Definitivamente. Los más jóvenes están más cómodos con la tecnología, mientras que algunos docentes más mayores prefieren métodos tradicionales.
+
+PROFESOR (Facultad de Derecho) P3: Y eso puede generar una brecha en el aula. La capacitación es fundamental para cerrar estas diferencias. 
+
+INVESTIGADOR: Excelente punto. Hablemos de la formación o apoyo que necesitan los docentes para integrar la IAG de forma efectiva y responsable.
+
+PROFESOR (Facultad de Humanidades) P4: Necesitamos talleres y recursos específicos. Pero no solo eso, también un espacio para compartir buenas prácticas.
+
+PROFESOR (Facultad de Medicina) P6: Estoy de acuerdo. Creo que una buena opción podría ser involucrar a los estudiantes en este proceso de aprendizaje, haciéndolos parte de la formación.
+
+PROFESOR (Facultad de Artes) P7: Es interesante esa idea. Además, el empoderamiento de docentes y estudiantes puede surgir al permitir que practiquen la IAG en un entorno seguro.
+
+ADMINISTRATIVO (Escuela de Gobierno) PE1: Hablando de empoderamiento, ¿cómo podría la IAG empoderar a docentes y estudiantes?
+
+PROFESOR (Facultad de Educación) P2: Si se usa correctamente, la IAG puede ofrecer a los estudiantes una voz más activa en el aprendizaje, además de que los docentes pueden liberar tiempo para dedicarse a la interacción personal.
+
+PROFESOR (Departamento de Psicología) P1: Cierto. Pero también es crucial no perder el aspecto humano que trae la enseñanza.
+
+INVESTIGADOR: Ahora, adentrándonos en la categoría de ética en la enseñanza: ¿Cuáles son los mayores retos que plantea la IAG para los procesos educativos?
+
+PROFESOR (Facultad de Derecho) P3: La desinformación sería un gran reto, ya que los estudiantes pueden aceptar información generada por IAG sin cuestionarla.
+
+PROFESOR (Facultad de Medicina) P6: Además, está la cuestión de la propiedad intelectual. Si un estudiante usa una obra generada por la IAG, ¿quién es el autor?
+
+ADMINISTRATIVO (Escuela de Administración) PE2: Y no olvidemos los dilemas éticos que pueden surgir. ¿Quién podría verse perjudicado con el uso de la IAG? ¿Y quién podría beneficiarse?
+
+PROFESOR (Facultad de Ciencias Sociales) P11: Las voces menos privilegiadas podrían quedar aún más marginadas si no se tienen en cuenta sus realidades en las herramientas de IAG.
+
+PROFESOR (Departamento de Química) P12: En contraposición, aquellos que tengan acceso a la tecnología y formación serán los que más se beneficien.
+
+INVESTIGADOR: Hablemos ahora de si alguien debería controlar el uso de la IAG en la educación. ¿Quién y cómo?
+
+PROFESOR (Facultad de Humanidades) P4: Creo que debe haber regulaciones claras, pero no puede ser solo responsabilidad de un ente gubernamental. Las instituciones educativas también deben asumir esa carga.
+
+PROFESOR (Facultad de Artes) P7: Me gustaría ver más colaboración entre universidades y empresas tecnológicas para promover el uso responsable.
+
+INVESTIGADOR: Continuando con el tema de ética, ¿cómo influyen la privacidad en línea y la seguridad de los datos?
+
+PROFESOR (Facultad de Medicina) P6: La seguridad es fundamental, y creo que tanto estudiantes como docentes deben ser sensibilizados sobre el manejo de sus datos.
+
+ADMINISTRATIVO (Escuela de Gobierno) PE1: La confianza es esencial. Si los estudiantes sienten que sus datos están en peligro, eso afectará su disposición para usar tecnologías emergentes.
+
+INVESTIGADOR: Finalmente, ¿cuáles son los dilemas éticos más relevantes en su campo?
+
+PROFESOR (Facultad de Derecho) P3: En Derecho, el uso de IAG puede influir en la práctica y en cómo los futuros abogados se preparan. Además, la ética en la aplicación de la ley con estas nuevas tecnologías es inquietante.
+
+PROFESOR (Departamento de Psicología) P1: En Psicología nos preocupan las implicaciones en el bienestar de los estudiantes. ¿Podría la IAG convertirse en un sustituto de la interacción humana?
+
+INVESTIGADOR: Vamos a cambiar de categoría y hablar sobre competencias profesionales y tendencias. ¿Conocen tendencias de uso de la IAG a nivel local, nacional o internacional?
+
+PROFESOR (Facultad de Ingeniería) P13: Desde lo técnico, he visto un creciente uso en la automatización de procesos. A nivel internacional hay una mayor adopción de la IAG en el desarrollo de software.
+
+PROFESOR (Facultad de Economía) P14: Hay una tendencia en la formación de competencias que integran IAG en la educación de negocios, lo que es fascinante, pero preocupante al mismo tiempo.
+
+ADMINISTRATIVO (Escuela de Administración) PE2: Sí, y eso plantea retos adicionales. ¿Cuáles son los principales retos que enfrentan en su campo profesional con respecto a la IAG?
+
+PROFESOR (Departamento de Química) P12: La resistencia al cambio es uno de los más grandes. Muchos colegas siguen escépticos sobre la utilidad real de la IAG.
+
+PROFESOR (Facultad de Medicina) P6: Exacto, además de la falta de formación y de estrategias claras sobre cómo implementar la IAG de manera efectiva en nuestras prácticas.
+
+INVESTIGADOR: Ha sido una conversación muy interesante, con muchos puntos válidos. Agradezco su participación y las valiosas ideas que compartieron. 
+
+-- Fin del archivo 2 --
+
+
+
+-- Inicio del archivo 3 --
+
+INVESTIGADOR: Bienvenidos todos. Me gustaría comenzar con la primera categoría, el uso actual de la IAG. ¿Ustedes usan IAG para preparar o durante sus clases?
+
+PROFESOR (Departamento de Lenguas y Cultura) PE1: Yo la he comenzado a usar para generar materiales, como ejemplos de escritura. Me resulta muy útil para tener diferentes estilos.
+
+PROFESOR (Facultad de Medicina) PE2: Interesante. En biología, he probado algunos generadores de texto para preparar artículos, pero no tanto en clase. ¿Y ustedes? ¿Quiénes son los usuarios de la IAG en sus contextos?
+
+PROFESOR (Departamento de Psicología) PE3: Pienso que somos varios, pero los estudiantes son los más activos. A veces, me sorprende ver cómo tienen herramientas como ChatGPT a su alcance y las utilizan para tareas.
+
+ADMINISTRATIVO (Facultad de Ingeniería) PE1: También creo que hay un uso creciente entre los administrativos al preparar informes. La IAG les facilita el trabajo.
+
+INVESTIGADOR: Interesante observación. Ahora, pasemos a la enseñanza y aprendizaje. ¿Qué herramientas y versiones de IAG usan en su práctica educativa? ¿Con qué frecuencia? ¿Observan diferencias entre versiones?
+
+PROFESOR (Facultad de Derecho) PE4: Usualmente, empleo versiones de IAG de texto, como ChatGPT o algunas alternativas locales. Lo uso semanalmente, sobre todo para preparar clase. Noté que hay diferencias en la precisión de las respuestas.
+
+PROFESOR (Facultad de Artes) PE5: ¿Hay diferencias considerables? A veces pienso que, en el arte, lo que importa es la creatividad y siento que la IAG puede limitarla.
+
+PROFESOR (Departamento de Química) PE6: Bueno, yo creo que eso depende de la intención. En mis clases de química, he encontrado que si se utiliza de manera adecuada, puede ser muy enriquecedora, pero es cierto que es un tema polémico.
+
+INVESTIGADOR: ¿Cree que la edad y las habilidades digitales influyen en el uso de IAG en la práctica educativa? ¿Cómo?
+
+PROFESOR (Facultad de Educación) PE7: Definitivamente. Algunos colegas tienen más resistencia a usar estas herramientas. Veo a los más jóvenes como mucho más abiertos a integrarlas. Hay una brecha generacional clara.
+
+PROFESOR (Escuela de Gobierno) PE8: Sí, pero también hay aquellos de edad más avanzada que son muy hábiles digitalmente. A veces se subestiman sus capacidades.
+
+ADMINISTRATIVO (Facultad de Humanidades) PE2: ¡Exactamente! No podemos generalizar. El componente de formación en habilidades digitales es fundamental.
+
+INVESTIGADOR: Precisamente, eso nos lleva a la siguiente pregunta. ¿Qué tipo de formación o apoyo necesitan los docentes para integrar la IAG de forma efectiva y responsable?
+
+PROFESOR (Facultad de Medicina) PE9: Creo que se necesita capacitación específica. No solo en el uso de la herramienta, sino también en la ética y la práctica responsable.
+
+PROFESOR (Facultad de Arquitectura y Diseño) PE10: Estoy de acuerdo. Esto no se trata sólo de saber usar algo nuevo, sino de saber cómo usarlo de manera crítica. Esto es especialmente crucial en diseño.
+
+INVESTIGADOR: ¿Cómo podría la IAG empoderar a docentes y estudiantes?
+
+PROFESOR (Departamento de Lenguas y Cultura) PE1: Puede ser un gran recurso para fomentar la creatividad. Por ejemplo, en mis clases de escritura, invito a los estudiantes a interactuar con la IAG para explorar sus ideas.
+
+PROFESOR (Departamento de Matemáticas) PE11: Estoy algo escéptico. Siento que, si se usa para resolver problemas matemáticos sin entender el proceso, estamos perdiendo algo importante.
+
+PROFESOR (Departamento de Psicología) PE3: Pero eso también depende de cómo se plantee el uso de la IAG. Puedo ver casos donde el uso de estas herramientas inspire procesos de pensamiento crítico.
+
+INVESTIGADOR: Cambiando de tema, hablemos sobre ética en la enseñanza. ¿Cuáles son los mayores retos que plantea la IAG para los procesos educativos?
+
+PROFESOR (Facultad de Derecho) PE4: Uno de los problemas es la calidad de la información. No siempre podemos confiar en lo que la IAG produce. Esto puede generar confusión o desinformación.
+
+PROFESOR (Escuela de Gobierno) PE8: También está el problema de la honestidad académica. Si un estudiante usa IAG para trabajos y no lo dice, ¿es esto deshonesto? ¿Y el maestro cómo puede saberlo?
+
+PROFESOR (Facultad de Medicina) PE9: Eso plantea una serie de dilemas éticos importantes. Pero, ¿qué pasa con los beneficios de estas herramientas? Alguien podría verse perjudicado con estas prácticas, pero al mismo tiempo, para algunos, puede ser una ayuda real.
+
+INVESTIGADOR: ¿Alguien debería controlar el uso de la IAG en la educación? ¿Quién y cómo?
+
+PROFESOR (Facultad de Artes) PE5: Creo que es necesario cierto control, pero debe ser flexible. No queremos limitar la creatividad ni la capacidad de explorar.
+
+PROFESOR (Facultad de Educación) PE7: Estoy de acuerdo. Tal vez un enfoque regulador que mantenga libertad y creatividad, pero que al mismo tiempo proteja la integridad académica.
+
+INVESTIGADOR: ¿Cómo influyen la privacidad en línea y la seguridad de los datos?
+
+ADMINISTRATIVO (Facultad de Humanidades) PE2: Es un tema delicado. Cuando se estudia y se utilizan herramientas IAG, hay que ser consciente de que los datos pueden terminar en manos equivocadas.
+
+PROFESOR (Departamento de Química) PE6: Absolutamente. Los estudiantes necesitan entender que el uso de información sensible debe manejarse con cuidado.
+
+INVESTIGADOR: Finalmente, ¿cuáles son los dilemas éticos más relevantes en su campo?
+
+PROFESOR (Facultad de Derecho) PE4: En derecho, uno de los dilemas es la propiedad intelectual. Si un estudiante utiliza IAG para generar un texto, ¿a quién pertenece ese texto?
+
+PROFESOR (Facultad de Medicina) PE9: En la medicina, tenemos que pensar en el uso de datos sensibles y la confidencialidad. No es solo un asunto técnico, sino humano.
+
+PROFESOR (Facultad de Economía) PE12: En mi área, la creación de contenido y la validez de las fuentes son preocupaciones constantes. Los datos falsos pueden ser muy perjudiciales.
+
+INVESTIGADOR: Agradezco mucho su participación y sus valiosas opiniones. Esta discusión ha sido muy enriquecedora.
+
+-- Fin del archivo 3 --
+
+
+
+-- Inicio del archivo 4 --
+
+INVESTIGADOR: Buenas tardes a todos, gracias por estar aquí. Para comenzar, me gustaría preguntarles, ¿ustedes usan inteligencia artificial generativa para preparar o durante sus clases?
+
+PROFESOR (Facultad de Educación) PE1: Yo he estado experimentando un poco con IAG para crear recursos educativos. En particular, uso algunas herramientas para generar preguntas y respuestas de práctica. Me parece útil.
+
+PROFESOR (Departamento de Psicología) PE2: Yo también lo he intentado en mis clases. Soy escéptico sobre su efectividad a largo plazo, pero definitivamente es interesante. Aunque, principalmente, lo usan los estudiantes para apoyo, no tanto en la enseñanza directa.
+
+ADMINISTRATIVO (Facultad de Medicina) PE1: Sí, los estudiantes han comenzado a integrar esto, especialmente para investigación. Algunos médicos en formación están utilizando IAG para adquirir información más rápida.
+
+PROFESOR (Facultad de Ingenieria) PE3: Creo que el uso de IAG varía mucho entre las disciplinas. En mi departamento, la mayoría de los docentes todavía son reacios a usarla en aulas, aunque está en la discusión.
+
+PROFESOR (Escuela de Administración) PE4: Definitivamente los estudiantes son los principales usuarios en este contexto. Sin embargo, deberíamos preguntarnos si sería correcto depender de esta tecnología sin una base sólida en los temas.
+
+INVESTIGADOR: Interesante. Y, ¿quiénes creen que son los usuarios de la IAG en sus contextos? 
+
+PROFESOR (Departamento de Lenguas y Cultura) PE5: Principalmente, los estudiantes del pregrado. Pero también veo a algunos colegas experimentando con ello, aunque muchos aún no saben cómo utilizarlo efectivamente.
+
+PROFESOR (Facultad de Derecho) PE6: Yo pienso que los investigadores y académicos son los más propensos a usarla para profundizar en sus estudios. En mi experiencia, se ha vuelto útil para revisar casos legales.
+
+PROFESOR (Facultad de Arquitectura y Diseño) PE7: En nuestro campo, la IAG se está empleando para generar ideas preliminares en el diseño. Los estudiantes a menudo usan estas herramientas para obtener inspiración.
+
+INVESTIGADOR: Pasando a la enseñanza y el aprendizaje, ¿qué herramientas y versiones de IAG usan en su práctica educativa? ¿Con qué frecuencia? 
+
+PROFESOR (Facultad de Humanidades) PE8: He estado usando modelos como ChatGPT y algunas plataformas de generación de texto. Lo hago una vez por semana en mis clases. He notado que funciona mejor en algunos contextos.
+
+PROFESOR (Departamento de Matemáticas) PE9: Por mi parte, todavía no he encontrado una herramienta que se adapte bien a nuestras necesidades. Supongo que la programación de preguntas matemáticas es más compleja. 
+
+PROFESOR (Escuela de Gobierno) PE10: Yo utilizo plataformas de IAG que analizan grandes volúmenes de texto rápidamente. También he observado que algunos estudiantes lo usan para generar ensayos, lo cual es a veces problemático.
+
+INVESTIGADOR: En relación a esto, ¿creen que la edad y las habilidades digitales influyen en el uso de IAG en la práctica educativa? 
+
+PROFESOR (Facultad de Educación) PE1: Definitivamente. Los estudiantes más jóvenes parecen tener una habilidad mejor desarrollada para integrar estas herramientas que los docentes más veteranos. 
+
+PROFESOR (Facultad de Medicina) PE1: Sin duda, hay una brecha generacional. Sin embargo, también hay docentes jóvenes que todavía tienen dificultades con la tecnología.
+
+PROFESOR (Facultad de Artes) PE11: La cuestión de la formación es crucial aquí. Los más viejos podemos necesitar más tiempo para adaptarnos, pero no es solo cuestión de edad, también de formación y motivación.
+
+INVESTIGADOR: ¿Qué tipo de formación o apoyo creen que necesitan los docentes para integrar la IAG de forma efectiva y responsable? 
+
+ADMINISTRATIVO (Escuela de Administración) PE2: Necesitamos talleres prácticos. La teoría está bien, pero ver cómo se aplican en situaciones reales es diferente.
+
+PROFESOR (Facultad de Humanidades) PE8: Yo diría que los capacitadores deberían ser expertos en tecnología educativa. No solo ofreciendo cursos, sino trabajando directamente con nosotros.
+
+PROFESOR (Departamento de Música) PE12: Estoy de acuerdo. Además, creo que debemos discutir más sobre la ética del uso de IAG en nuestras clases.
+
+INVESTIGADOR: Hablando de eso, ¿cómo podría la IAG empoderar a docentes y estudiantes?
+
+PROFESOR (Facultad de Ingeniería) PE3: Creo que empodera a los estudiantes al facilitar la investigación y la creación de contenido. También les da más agilidad en su aprendizaje.
+
+PROFESOR (Departamento de Psicología) PE2: Así es, y para los profesores, puede liberarlos de tareas administrativas repetitivas, permitiendo que se concentren en la enseñanza.
+
+PROFESOR (Facultad de Derecho) PE6: Estoy un poco más cauteloso. Aunque hay ventajas, creo que debemos ser vigilantes sobre el tipo de dependencia que esto puede generar.
+
+INVESTIGADOR: Hablemos sobre la ética en la enseñanza. ¿Cuáles son los mayores retos que plantea la IAG para los procesos educativos?
+
+PROFESOR (Facultad de Artes) PE11: Sin duda, la falta de originalidad es un gran problema. Muchos estudiantes pueden usar IAG para eludir el trabajo duro.
+
+PROFESOR (Escuela de Gobierno) PE10: También está el riesgo de desinformación. Como educadores, debemos tener cuidado de no enseñar información errónea que la IAG pueda generar.
+
+PROFESOR (Facultad de Química) PE13: Y no olvidar los sesgos que pueden tener estos sistemas. Debemos ser conscientes de cómo eso afecta el contenido que compartimos.
+
+INVESTIGADOR: ¿Qué retos éticos surgen con el uso de IAG en su disciplina?
+
+PROFESOR (Facultad de Medicina) PE1: La privacidad de los datos es un gran tema. ¿Qué pasa con la información que ingresamos y cómo se puede usar?
+
+ADMINISTRATIVO (Facultad de Ingeniería) PE1: Sí, y no solo eso, también hay bias en los algoritmos que podrían afectar nuestras enseñanzas.
+
+PROFESOR (Facultad de Humanidades) PE8: Un gran dilema es la autenticidad del trabajo estudiantil. ¿Cómo aseguramos que un estudiante está aprendiendo realmente y no solo copiando lo que genera la IAG?
+
+INVESTIGADOR: ¿Quién podría verse perjudicado con el uso de la IAG? ¿Y quién podría beneficiarse?
+
+PROFESOR (Departemento de Química) PE13: Los estudiantes con menos habilidades digitales pueden verse perjudicados por la falta de acceso. Sin embargo, quienes son adeptos a la tecnología se benefician muchísimo.
+
+PROFESOR (Facultad de Derecho) PE6: Están los docentes que pueden sentirse amenazados por la automatización de ciertas tareas. De nuevo, creo que es importante encontrar un equilibrio.
+
+PROFESOR (Escuela de Administración) PE4: Lo que sí es seguro es que aquellos que sean capaces de adaptarse rápido serán quienes más se beneficien en este nuevo contexto educativo.
+
+INVESTIGADOR: ¿Alguien debería controlar el uso de la IAG en la educación? ¿Quién y cómo?
+
+PROFESOR (Facultad de Arquitectura y Diseño) PE7: Creo que debe haber pautas claras. Tal vez una entidad reguladora que establezca normas y directrices para su uso en el aula.
+
+PROFESOR (Facultad de Humanidades) PE8: Estoy de acuerdo. Además, creo que sería útil tener una conversación abierta entre las disciplinas sobre cómo estamos utilizando estos recursos.
+
+INVESTIGADOR: ¿Cómo influyen la privacidad en línea y la seguridad de los datos en la IAG en la educación?
+
+PROFESOR (Facultad de Medicina) PE1: La privacidad es crítica. Los estudiantes deben ser informados sobre cómo manejar sus datos al usar estas herramientas.
+
+PROFESOR (Facultad de Artes) PE11: Además, hay que educar a los estudiantes sobre las implicaciones de compartir información personal al interactuar con estas herramientas.
+
+INVESTIGADOR: Por último, ¿cuáles son los dilemas éticos más relevantes en su campo?
+
+PROFESOR (Facultad de Derecho) PE6: El plagio es un tema extremadamente crítico. La posibilidad de que los estudiantes utilicen IAG para su trabajo académico es un dilema constante.
+
+PROFESOR (Departamento de Matemáticas) PE9: En matemáticas, también enfrentamos esto. La dependencia excesiva de calculadoras y tecnología puede minar el pensamiento crítico.
+
+PROFESOR (Escuela de Gobierno) PE10: Sí, y en términos de desinformación, es un riesgo que impacta en todas las disciplinas. 
+
+INVESTIGADOR: Muchas gracias a todos por su valioso aporte y la discusión tan enriquecedora. Esto nos proporciona una visión muy clara sobre cómo se está percibiendo y utilizando la IAG en sus respectivos campos. 
+
+-- Fin del archivo 4 --
+
+
+
+-- Inicio del archivo 5 --
+
+INVESTIGADOR: Bienvenidos a todos y gracias por participar en este grupo focal. Vamos a iniciar con la primera categoría: Uso actual de la IAG. ¿Ustedes usan IAG para preparar o durante sus clases?
+
+PROFESOR (Departamento de Lenguas y Cultura) PE1: Yo sí la he estado utilizando, principalmente para crear material didáctico y ejercicios de práctica. Me ha facilitado mucho el trabajo.
+
+PROFESOR (Facultad de Medicina) PE2: En mi caso, la utilizo para generar casos clínicos simulados. Me parece útil, pero tengo algunas reservas sobre su precisión.
+
+PROFESOR (Facultad de Artes) PE3: Yo la uso para inspirarme en procesos creativos, pero aún no la he integrado de lleno en mis clases. Creo que aún me falta explorar sus posibilidades.
+
+PROFESOR (Departamento de Psicología) PE4: A veces, uso IAG para generar preguntas debatibles. Pero lo que he notado es que no todos mis estudiantes tienen el mismo acceso a la tecnología. 
+
+PROFESOR (Facultad de Ingeniería) PE5: Estoy de acuerdo. He encontrado que algunos estudiantes están más familiarizados con estas herramientas que otros, incluso dentro de la misma carrera.
+
+INVESTIGADOR: Interesante. ¿Quiénes son los usuarios de la IAG en sus contextos?
+
+PROFESOR (Facultad de Educación) PE6: Creo que, en mi caso, más de mis colegas están comenzando a usar estas herramientas, pero los estudiantes son quienes más se benefician realmente.
+
+PROFESOR (Escuela de Gobierno) PE7: En las discusiones en clase, veo que mis estudiantes tienden a usar IAG para hacer investigaciones más rápidamente. A veces me preocupa que no citen correctamente las fuentes.
+
+PROFESOR (Departamento de Química) PE8: Eso es un gran punto. Yo también me encuentro en el mismo dilema. Mis alumnos utilizan la IA para generar experimentos virtuales, pero no siempre hay una comprensión profunda.
+
+INVESTIGADOR: Pasemos a la siguiente categoría: Enseñanza y aprendizaje. ¿Qué herramientas y versiones de IAG usan en su práctica educativa? ¿Con qué frecuencia?
+
+PROFESOR (Facultad de Medicina) PE2: Mayormente uso ChatGPT y otras herramientas similares una vez a la semana, especialmente cuando tengo que preparar lecciones. 
+
+PROFESOR (Departamento de Música) PE3: Yo ya estoy aplicando herramientas como AIVA para componer música. Sin embargo, creo que los estudiantes necesitan guías sobre cómo utilizarlas.
+
+PROFESOR (Facultad de Artes) PE4: Deberíamos pensar en experiencias más prácticas. A veces las versiones más recientes incorporan mejores algoritmos, pero eso requiere que estemos actualizados.
+
+PROFESOR (Escuela de Administración) PE5: Y esa es otra complicación. La gente suele quedarse con versiones antiguas porque no conocen las novedades. Es una especie de brecha de conocimiento.
+
+INVESTIGADOR: ¿Cree que la edad y las habilidades digitales influyen en el uso de IAG en la práctica educativa? ¿Cómo?
+
+PROFESOR (Departamento de Psicología) PE6: Definitivamente. Los docentes más jóvenes tienden a adoptar estas herramientas más rápido. Pero no solo es cuestión de edad, a veces es más sobre actitud hacia la tecnología.
+
+PROFESOR (Facultad de Humanidades) PE1: Sí, también he visto que algunos de mis compañeros más veteranos son muy reticentes. A veces se sienten amenazados por la tecnología.
+
+PROFESOR (Departamento de Química) PE2: Eso puede ser un reto a la hora de integrar estas herramientas en el aula. Deberíamos pensar en sesiones de formación.
+
+INVESTIGADOR: Hablando de formación, ¿qué tipo de apoyo necesitan los docentes para integrar la IAG de forma efectiva y responsable?
+
+PROFESOR (Escuela de Gobierno) PE3: Formación sobre cómo utilizar la IAG y estrategias para afrontar criterios éticos. Necesitamos un marco claro.
+
+PROFESOR (Facultad de Derecho) PE4: Exactamente. Un marco que nos guíe en el uso responsable y en comprender los límites de la IAG en el ámbito educativo.
+
+PROFESOR (Facultad de Medicina) PE5: Además, deberíamos contar con apoyo técnico continuo. A veces, cuando experimentamos con nuevas herramientas, surgen dudas que no sabemos resolver.
+
+INVESTIGADOR: ¿Cómo podría la IAG empoderar a docentes y estudiantes?
+
+PROFESOR (Departamento de Lenguas y Cultura) PE8: Creo que puede empoderar a los estudiantes al darles más herramientas para autoedición y práctica. Pero también a nosotros como docentes, al facilitar la personalización del contenido.
+
+PROFESOR (Facultad de Educación) PE6: Sí, habilita a los estudiantes para que puedan explorar más por sí mismos. Pero hay que tener cuidado con la dependencias de estas herramientas.
+
+INVESTIGADOR: Cambiando a la ética en la enseñanza, ¿cuáles son los mayores retos que plantea la IAG para los procesos educativos?
+
+PROFESOR (Facultad de Derecho) PE1: Uno de los mayores retos es el riesgo de que los estudiantes confíen ciegamente en la información generada por la IAG. 
+
+PROFESOR (Escuela de Administración) PE2: Y también está la cuestión de la plagio o de la originalidad del trabajo presentado. ¿Hasta qué punto es auténtico?
+
+PROFESOR (Departamento de Psicología) PE3: Eso es crucial. Mientras los estudiantes se acostumbren a utilizar IAG, hay que fomentar debates sobre autoría y creatividad.
+
+INVESTIGADOR: ¿Y qué retos éticos surgen con el uso de IAG en su disciplina?
+
+PROFESOR (Facultad de Ciencias Sociales) PE4: En nuestro caso, la manipulación de información puede ser un gran dilema. Hay que ser conscientes de cómo se pueden distorsionar las realidades.
+
+PROFESOR (Facultad de Medicina) PE5: Totalmente. Además, la interpretación de datos médicos puede ser crítica. La IAG podría llevar a malas conclusiones si no se verifica adecuadamente.
+
+INVESTIGADOR: Mencionaban a quién podría perjudicar el uso de la IAG. ¿Quiénes creen que se beneficiarían o perjudicarían, y por qué?
+
+PROFESOR (Escuela de Gobierno) PE6: Los estudiantes con mejores recursos tecnológicos pueden beneficiarse más, mientras que aquellos con menos acceso quedan atrás.
+
+PROFESOR (Facultad de Educación) PE5: También los docentes que están dispuestos a aprender y adaptarse a las nuevas herramientas, en contraposición a quienes se oponen.
+
+INVESTIGADOR: ¿Alguien debería controlar el uso de la IAG en la educación? ¿Quién y cómo?
+
+PROFESOR (Facultad de Derecho) PE1: Es vital tener un control, pero la pregunta es quién establece las normas. Podría ser útil que las universidades desarrollen sus propias políticas.
+
+PROFESOR (Facultad de Ingeniería) PE2: Tal vez una combinación, con la colaboración del cuerpo docente y un comité de estudiantes que ayude a definir un uso ético.
+
+INVESTIGADOR: Hablando de privacidad y seguridad, ¿cómo influyen en su percepción del uso de la IAG?
+
+PROFESOR (Departamento de Química) PE3: La privacidad es un tema candente. Lo que los estudiantes escriben y cómo lo usan puede quedar registrado, y no todos son conscientes de eso.
+
+PROFESOR (Facultad de Medicina) PE4: Eso plantea dudas sobre la ética en la enseñanza y el papel de nuestra institución en proteger la información personal de los estudiantes.
+
+INVESTIGADOR: Finalmente, ¿cuáles son los dilemas éticos más relevantes en su campo?
+
+PROFESOR (Facultad de Humanidades) PE5: Sin duda, el acceso a información precisa y la capacidad de crear realidades alternativas a través de la IAG son dilemas. 
+
+PROFESOR (Escuela de Gobierno) PE6: Y deberíamos considerar el impacto de esto en la educación cívica y la formación de ciudadanos críticos. 
+
+INVESTIGADOR: Para concluir, ¿conocen tendencias de uso de la IAG a nivel local, nacional o internacional?
+
+PROFESOR (Facultad de Economía) PE1: He visto que en otros países hay un uso más avanzado. Algunos están integrando la IAG en los curriculum formalmente. Es algo a considerar.
+
+PROFESOR (Facultad de Medicina) PE2: Aquí en Colombia estamos un poco atrasados en comparación. Es algo que deberíamos abordar urgentemente.
+
+PROFESOR (Facultad de Ingeniería) PE3: Eso implica que debemos ser proactivos y quizás generar un plan estratégico para avanzar en este ámbito.
+
+INVESTIGADOR: Y para finalizar, ¿cuáles son los principales retos que enfrentan en su campo profesional con respecto a la IAG?
+
+PROFESOR (Departamento de Psicología) PE4: Integrar la IAG sin perder la esencia de la enseñanza humana. Esa conexión personal es vital.
+
+PROFESOR (Facultad de Educación) PE5: Hay que encontrar ese equilibrio entre emplear la tecnología y fortalecer los fundamentos pedagógicos.
+
+PROFESOR (Facultad de Humanidades) PE6: La clave es que consideremos la IAG como herramienta, no como un reemplazo. Si logramos eso, podremos aprovecharla al máximo.
+
+INVESTIGADOR: Muchas gracias a todos por sus valiosas opiniones y aportes. Ha sido una conversación muy productiva.
+
+-- Fin del archivo 5 --
+
+
+
+-- Inicio del archivo 6 --
+
+INVESTIGADOR: Bienvenidos a todos, estoy muy contento de que puedan participar en este grupo focal sobre la percepción de la inteligencia artificial generativa en el contexto educativo. Vamos a comenzar con la primera categoría: Uso actual de la IAG. ¿Ustedes usan IAG para preparar o durante sus clases? 
+
+PROFESOR (Departamento de Lenguas y Cultura) PE1: En mi caso, sí. Utilizo herramientas de IAG para crear contenido diferente, como ejercicios de conversación en idiomas. A veces le pido a la IA que genere diálogos específicos.
+
+PROFESOR (Facultad de Educación) PE2: Yo también, sobre todo para generar preguntas o temas de discusión. Me ha ayudado a diversificar mis clases, aunque a veces es complicado asegurarse de que la información sea precisa.
+
+PROFESOR (Departamento de Psicología) PE3: En mi disciplina, la IAG puede ser bastante útil, pero no todos los profesores la utilizan. Algunos aún son escépticos. 
+
+PROFESOR (Facultad de Humanidades) PE4: Es cierto, el escepticismo es un tema recurrente. Muchos consideran que el uso de la IAG puede restarles un sentido crítico a los estudiantes. Pero yo creo que es cuestión de cómo se utiliza.
+
+INVESTIGADOR: Interesante punto. Y sobre la segunda pregunta, ¿quiénes son los usuarios de la IAG en sus contextos?
+
+PROFESOR (Facultad de Medicina) PE5: Creo que principalmente los docentes y, en menor medida, los estudiantes. He visto algunos estudiantes que experimentan con IAG para trabajos, pero no todos saben cómo utilizarla de forma adecuada.
+
+PROFESOR (Escuela de Administración) PE6: Estoy de acuerdo. En la administración, también veo que hay profesores que la usan, pero muchos estudiantes todavía no le sacan el provecho que podrían. Hay un desafío en la adopción.
+
+PROFESOR (Departamento de Matemáticas) PE7: Los que implementan más son los docentes que ya tienen una base tecnológica. Muchos todavía se resisten a integrar herramientas digitales en su enseñanza.
+
+INVESTIGADOR: Pasemos a la categoría de Enseñanza y aprendizaje. ¿Qué herramientas y versiones de IAG usan en su práctica educativa? ¿Con qué frecuencia? 
+
+PROFESOR (Facultad de Arquitectura y Diseño) PE8: Yo uso principalmente ChatGPT para crear conceptos de diseño y explorar nuevas ideas. Lo utilizo un par de veces a la semana en clase.
+
+PROFESOR (Facultad de Artes) PE9: En el área de artes, exploro herramientas de IAG como DALL-E para inspirar proyectos de arte visual. Me parece útil, pero no todos los estudiantes tienen acceso a la tecnología en casa.
+
+PROFESOR (Departamento de Química) PE10: En química, empleo IAG para generar ejemplos y problemas. Esto lo hago antes de las clases, quizás una vez cada dos semanas.
+
+INVESTIGADOR: ¿Cree que la edad y las habilidades digitales influyen en el uso de IAG en la práctica educativa? ¿Cómo?
+
+PROFESOR (Escuela de Gobierno) PE11: Definitivamente. Los profesores más jóvenes parecen estar más dispuestos a experimentar con IAG, mientras que algunos mayores son reticentes.
+
+PROFESOR (Facultad de Ingeniería) PE12: En mi departamento muchos de los profesores más jóvenes están integrando herramientas de IAG, pero hay que tener en cuenta que la formación previa en habilidades digitales juega un papel crucial.
+
+PROFESOR (Departamento de Música) PE13: Eso es muy cierto. Algunos colegas no se sienten cómodos usando tecnología en sus clases, lo que limita la integración de IAG.
+
+INVESTIGADOR: Hablando de formación, ¿qué tipo de formación o apoyo necesitan los docentes para integrar la IAG de forma efectiva y responsable?
+
+PROFESOR (Facultad de Derecho) PE14: Deberíamos tener talleres específicos sobre IAG. No es solo saber usarla, sino también entender cómo funciona detrás.
+
+PROFESOR (Departamento de Química) PE10: Sí, apreciaría cursos sobre las aplicaciones y limitaciones de la IAG en educación. Lo que hoy sé es prácticamente autodidacta.
+
+PROFESOR (Facultad de Educación) PE2: Es fundamental establecer guías éticas sobre cómo utilizar la IAG en el aula. No podemos actuar a ciegas.
+
+INVESTIGADOR: ¿Cómo podría la IAG empoderar a docentes y estudiantes?
+
+PROFESOR (Facultad de Humanidades) PE4: Podría ofrecer más tiempo para enfocarse en interacciones significativas. Si delegamos tareas repetitivas a la IA, eso podría abrir espacio para el pensamiento crítico.
+
+PROFESOR (Departamento de Música) PE13: Exacto, pero también hay que encontrar un equilibrio. La IA no debe reemplazar la creatividad humana.
+
+PROFESOR (Facultad de Artes) PE9: Sí, la IAG debería ser una herramienta más, no un sustituto. En el arte, no se puede replicar la experiencia humana.
+
+INVESTIGADOR: Ahora, pasemos a la categoría de ética en la enseñanza. ¿Cuáles son los mayores retos que plantea la IAG para los procesos educativos?
+
+PROFESOR (Facultad de Medicina) PE5: El ruido en la información es un gran reto. Ha de enseñarse a los estudiantes a discernir lo que genera la IA.
+
+PROFESOR (Departamento de Psicología) PE3: También está el problema de cómo asegurar la autenticidad del trabajo de los estudiantes. ¿Dónde está la línea entre usar IAG como apoyo y plagio?
+
+PROFESOR (Escuela de Administración) PE6: La cuestión ética debe ser un tema central en las discusiones. Sobre todo, hay que formar a los estudiantes desde ahora.
+
+INVESTIGADOR: ¿Qué retos éticos surgen con el uso de IAG en su disciplina?
+
+PROFESOR (Facultad de Derecho) PE14: En derecho, el uso de documentos generados por IAG puede dar lugar a problemas de responsabilidad. ¿Quién es el responsable de ese contenido?
+
+PROFESOR (Facultad de Ingeniería) PE12: Y darle confianza a algo que no tiene juicio crítico. La IAG puede hacer afirmaciones erróneas pero presentarlas con aire de verdad.
+
+INVESTIGADOR: ¿Quién podría verse perjudicado con el uso de la IAG? ¿Y quién podría beneficiarse?
+
+PROFESOR (Departamento de Lenguas y Cultura) PE1: Los estudiantes menos familiarizados con la tecnología podrían quedar atrás. Por otro lado, aquellos que la manejen bien obtendrán una ventaja.
+
+PROFESOR (Facultad de Ciencias Sociales) PE15: Totalmente. Esto también puede exacerbar la desigualdad en el acceso a recursos educativos. 
+
+INVESTIGADOR: ¿Alguien debería controlar el uso de la IAG en la educación? ¿Quién y cómo?
+
+PROFESOR (Escuela de Gobierno) PE11: Es esencial que haya una regulación, pero eso no puede ser solo a nivel institucional. Las universidades deben colaborar con entidades externas.
+
+PROFESOR (Facultad de Medicina) PE5: Y también involucrar a los estudiantes en este proceso. Ellos deben ser parte de la solución.
+
+INVESTIGADOR: ¿Cómo influyen la privacidad en línea y la seguridad de los datos?
+
+PROFESOR (Departamento de Química) PE10: Es una preocupación constante. Los datos que se usan para entrenar a estas IA pueden comprometer la privacidad.
+
+PROFESOR (Escuela de Administración) PE6: Además, desconocemos las políticas de uso de esos datos. ¿Quién tiene acceso a ellos? Eso es alarmante.
+
+INVESTIGADOR: Y para finalizar esta categoría, ¿cuáles son los dilemas éticos más relevantes en su campo?
+
+PROFESOR (Facultad de Derecho) PE14: El acceso a la justicia y cómo IAG puede, en teoría, disminuirlo o aumentarlo. Es un tema delicado.
+
+PROFESOR (Departamento de Psicología) PE3: Creo que también debemos considerar la manipulación de la información y cómo se puede usar IAG para influir en opiniones y decisiones.
+
+INVESTIGADOR: Vamos a cerrar con la categoría de competencias profesionales y tendencias. ¿Conocen tendencias de uso de la IAG a nivel local, nacional o internacional?
+
+PROFESOR (Facultad de Educación) PE2: Hay un movimiento creciente en algunas universidades en el exterior que están integrando la IAG como parte del currículo. 
+
+PROFESOR (Facultad de Medicina) PE5: En conferencias internacionales, he visto un aumento en debates sobre las aplicaciones de IAG en la práctica médica.
+
+PROFESOR (Facultad de Arquitectura y Diseño) PE8: A nivel local, no he visto tanto, pero me siento optimista al respecto. Necesitamos promover un diálogo más amplio en la comunidad.
+
+INVESTIGADOR: Para concluir, ¿cuáles son los principales retos que enfrentan en su campo profesional con respecto a la IAG?
+
+PROFESOR (Escuela de Gobierno) PE11: La falta de formación adecuada es uno de los mayores retos. No solo en la práctica, sino también para los futuros profesionales.
+
+PROFESOR (Facultad de Ciencias Sociales) PE15: Otro reto es el estigma que recae sobre la IAG. A veces se ve como una amenaza en lugar de una herramienta.
+
+PROFESOR (Facultad de Cultura y Lenguas) PE1: Y además, la implementación real en las aulas es un desafío. Las instituciones deben apoyar esta transición.
+
+INVESTIGADOR: Muchas gracias a todos por sus opiniones y por participar en esta discusión tan rica y variada. Sin duda, hemos abordado muchos puntos relevantes sobre la IAG y su impacto en la educación.
+
+-- Fin del archivo 6 --
+

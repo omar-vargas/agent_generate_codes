@@ -130,6 +130,7 @@ elif st.session_state.step == 2:
             st.button("⬅️ Anterior", on_click=prev_step)
         with col2:
             st.button("➡️ Siguiente", on_click=next_step)
+            
     else:
         st.warning("Por favor completa el paso anterior.")
         if st.button("⬅️ Volver"):

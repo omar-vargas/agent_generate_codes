@@ -1,0 +1,10 @@
+Códigos
+Error al procesar la solicitud: Error code: 401 - {'error': {'code': '401'
+'message': 'Access denied due to invalid subscription key or wrong API endpoint. Make sure to provide a valid key for an active subscription and use a correct regional API endpoint for your resource.'}}
+
+1.Recopilar información sobre el papel de la IA Generativa en la educación superior en Uniandes y conexiones con el desarrollo de la mano de obra.  2.Uso actual de las herramientas de IA en los planes de estudio y en la práctica. Percepción de los estudiantes sobre la agilidad y resistencia requeridas en la era de la IA. 2. Percepción del profesorado y de los directores académicos. 2.Estrategias para mitigar el déficit de cualificación de la mano de obra. 2.Estrategias para mejorar y reciclar las competencias del profesorado y los líderes de la educación superior en Uniandes.
+Códigos
+Error al procesar la solicitud: Error code: 401 - {'error': {'code': '401'
+'message': 'Access denied due to invalid subscription key or wrong API endpoint. Make sure to provide a valid key for an active subscription and use a correct regional API endpoint for your resource.'}}
+
+1.Recopilar información sobre el papel de la IA Generativa en la educación superior en Uniandes y conexiones con el desarrollo de la mano de obra.  2.Uso actual de las herramientas de IA en los planes de estudio y en la práctica. Percepción de los estudiantes sobre la agilidad y resistencia requeridas en la era de la IA. 2. Percepción del profesorado y de los directores académicos. 2.Estrategias para mitigar el déficit de cualificación de la mano de obra. 2.Estrategias para mejorar y reciclar las competencias del profesorado y los líderes de la educación superior en Uniandes.
