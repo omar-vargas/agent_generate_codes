@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import os
 from dotenv import load_dotenv
-from typing import List
+from typing import List, Optional
 from typing import TypedDict, NotRequired
 from langgraph.graph import StateGraph, START, END
 import os
@@ -60,15 +60,14 @@ prompt_agente_corrector_codigos = {
 }
 
 # Definir el tipo de estado
-# Definir el tipo de estado usando 'Annotated' para permitir múltiples valores de 'questions'
 class State(TypedDict):
-    data: Annotated[list[str], operator.add]  # Usamos lista de cadenas
+    data: Annotated[list[str], operator.add]
     questions: Annotated[list[str], operator.add]
-    question: Annotated[list[str], operator.add]    # Usamos lista para permitir múltiples valores de 'questions'
+    question: Annotated[list[str], operator.add]
     codes: Annotated[list[str], operator.add]
-    final_codes:  Annotated[list[str], operator.add]
-    annotations:  Annotated[list[str], operator.add]
-    validate:  bool
+    final_codes: Annotated[list[str], operator.add]
+    annotations: Annotated[list[str], operator.add]
+    validate: bool
     temperature: NotRequired[float]
     max_tokens: NotRequired[int]
     top_p: NotRequired[float]
@@ -81,8 +80,7 @@ client = AzureOpenAI(
     api_version="2024-10-21"
 )
 
-def run_prompt(client, prompt_message: str, role_agent: dict, model: str = "gpt-4", temperature: float = 0.7, max_tokens: int = None, top_p: float = 1.0, frequency_penalty: float = 0.0, presence_penalty: float = 0.0, **kwargs):
-    # Realizar la solicitud al modelo de OpenAI
+def run_prompt(client, prompt_message: str, role_agent: dict, model: str = "gpt", temperature: float = 0.7, max_tokens: int = None, top_p: float = 1.0, frequency_penalty: float = 0.0, presence_penalty: float = 0.0, **kwargs):
     response = client.chat.completions.create(
         model=model,
         messages=[role_agent, {"role": "user", "content": prompt_message}],
@@ -94,11 +92,8 @@ def run_prompt(client, prompt_message: str, role_agent: dict, model: str = "gpt-
         **kwargs
     )
     
-    # Obtener el número total de tokens usados
     tokens = response.usage.total_tokens
-    
-    # Intentar acceder al contenido de manera más segura
-    content = response.choices[0].message.content  # Esto depende de la estructura
+    content = response.choices[0].message.content
 
     return content, tokens
 
@@ -110,7 +105,7 @@ def call_azure_openai(prompt: str, option: int, temperature: float = 0.7, max_to
             answer, tokens_used = run_prompt(client, prompt, prompt_agente_generador_codigos_feedback, temperature=temperature, max_tokens=max_tokens, top_p=top_p, frequency_penalty=frequency_penalty, presence_penalty=presence_penalty)
         elif option == 2:
             answer, tokens_used = run_prompt(client, prompt, prompt_agente_corrector_codigos, temperature=temperature, max_tokens=max_tokens, top_p=top_p, frequency_penalty=frequency_penalty, presence_penalty=presence_penalty)
-        elif option == 3:  # ✅ Agregar caso para etiquetado
+        elif option == 3:
             answer, tokens_used = run_prompt(client, prompt, prompt_etiquetado, temperature=temperature, max_tokens=max_tokens, top_p=top_p, frequency_penalty=frequency_penalty, presence_penalty=presence_penalty)
         else:
             raise ValueError(f"Opción no válida: {option}")
@@ -120,16 +115,13 @@ def call_azure_openai(prompt: str, option: int, temperature: float = 0.7, max_to
 
 def node_1(state: State) -> State:
     if "data" not in state:
-        state["data"] = []  # Inicializamos la lista si no existe
+        state["data"] = []
     if "questions" not in state:
-        state["questions"] = []  # Inicializamos 'questions' como lista si no existe
+        state["questions"] = []
     
-    # Check if questions are provided
     if state["questions"] and len(state["questions"]) > 0 and state["questions"][0].strip():
-        # Use original prompt with hypotheses
         prompt_text = 'La data es la siguiente ***' + str(state["data"]) + '***' + ' las preguntas son ***' + str(state["questions"])
     else:
-        # Use alternative prompt without hypotheses
         prompt_text = 'La data es la siguiente ***' + str(state["data"]) + '***. Analiza esta data cualitativa y genera códigos que correspondan a las ideas o conceptos clave que surjan en los textos.'
     
     temp = state.get("temperature", 0.7)
@@ -139,10 +131,8 @@ def node_1(state: State) -> State:
     pres_pen = state.get("presence_penalty", 0.0)
     
     answer = call_azure_openai(prompt_text, 0, temperature=temp, max_tokens=max_tok, top_p=top_p, frequency_penalty=freq_pen, presence_penalty=pres_pen)
-    # ... rest of function ...
-
+    
     state["codes"] = [answer]
-
     return state
 
 def validate_data(state: State) -> State:
@@ -166,10 +156,7 @@ def validate_data(state: State) -> State:
     )
 
     state["annotations"] = [answer]
-
-    # Guardamos temporalmente el estado en result_storage
     result_storage["estado_actual"] = state
-
     return state
 
 def human_aprobation(state: State, approved: bool = True, feedback: str = 'muchos codigos') -> Literal['node_1', END]:
@@ -178,34 +165,26 @@ def human_aprobation(state: State, approved: bool = True, feedback: str = 'mucho
     if state['validate'] == True:
         return END       
     else:
-        state['codes']
         return node_1
-       
+
 # Crear el grafo de estados
 builder = StateGraph(State)
-
-# Añadir nodos al grafo
 builder.add_node('node_1', node_1)
 builder.add_node('validate_data', validate_data)
-
-# Añadir transiciones entre los nodos
 builder.add_edge(START, 'node_1')
-builder.add_edge('node_1', 'validate_data')  # Nodo intermedio para combinar
+builder.add_edge('node_1', 'validate_data')
 builder.add_conditional_edges('validate_data', human_aprobation)
 
-# Ejecutar el grafo con el estado inicial
 initial_state = {
-    "data": ["percepcion de los estudiantes sobre la IA generatica"],  # Iniciar 'data' como una lista vacía
-    "questions": ['los estudiantes cada ven pensaran menos y seran mas flojos']  # Iniciar 'questions' como una lista vacía
+    "data": ["percepcion de los estudiantes sobre la IA generatica"],
+    "questions": ['los estudiantes cada ven pensaran menos y seran mas flojos']
 }
 
 # Configurar FastAPI
 app = FastAPI()
-
-# Permitir solicitudes CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Reemplaza "*" por una lista de orígenes específicos si es necesario
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -254,7 +233,6 @@ def load_data_from_txt(file_path: str):
     
     initial_state["data"] = [content]
 
-# Función para ejecutar el grafo
 def run_graph_with_data(pregunta: str, session_id: str):
     print(pregunta)
     file_path = f"./consolidado_{session_id}.txt"
@@ -270,8 +248,6 @@ def run_graph_with_data(pregunta: str, session_id: str):
     result = graph.invoke(initial_state, thread_config)
     result_storage['annotations'] = result['annotations']
     return str(result['codes'])
-
-# Endpoints de FastAPI
 
 def save_session_data(session_id: str, key: str, value):
     ruta = f"sessions/session_{session_id}.json"
@@ -301,7 +277,6 @@ def generar(request: PreguntasRequest):
         
         results = []
         
-        # Always generate codes with current logic (with hypotheses if provided)
         initial_state["questions"] = [preguntas] if preguntas.strip() else []
         initial_state["validate"] = False
         initial_state["temperature"] = request.temperature
@@ -313,11 +288,12 @@ def generar(request: PreguntasRequest):
         memory = MemorySaver()
         graph = builder.compile(checkpointer=memory)
         result = graph.invoke(initial_state, {"configurable": {"thread_id": session_id}})
-        results.append(str(result["codes"]))
         
-        # If hypotheses were provided, also generate codes without hypotheses
+        codes_str = result["codes"][0] if result["codes"] else ""
+        codes_list = [c.strip() for c in codes_str.split(',') if c.strip()]
+        results.append(codes_list)
+        
         if preguntas.strip():
-            # Create a fresh state for the second generation
             state_without_hyp = {
                 "data": initial_state["data"].copy(),
                 "questions": [],
@@ -331,15 +307,17 @@ def generar(request: PreguntasRequest):
             memory2 = MemorySaver()
             graph2 = builder.compile(checkpointer=memory2)
             result2 = graph2.invoke(state_without_hyp, {"configurable": {"thread_id": f"{session_id}_no_hyp"}})
-            results.append(str(result2["codes"]))
+            
+            codes_str2 = result2["codes"][0] if result2["codes"] else ""
+            codes_list2 = [c.strip() for c in codes_str2.split(',') if c.strip()]
+            results.append(codes_list2)
 
-        save_session_data(session_id, "codes", result["codes"])
+        save_session_data(session_id, "codes", codes_list)
         save_session_data(session_id, "data", initial_state["data"])
         save_session_data(session_id, "questions", initial_state["questions"])
         
-        # Save codes without hypotheses if they were generated
         if len(results) > 1:
-            save_session_data(session_id, "codes_sin_hipotesis", result2["codes"])
+            save_session_data(session_id, "codes_sin_hipotesis", codes_list2)
 
         return results
     except Exception as e:
@@ -396,7 +374,6 @@ async def guardar_archivo(request: ConsolidatedFileRequest):
 
 @app.post("/login/")
 def login(usuario: Usuario):
-    # Simulación de base de datos de usuarios
     usuarios_validos = {
         "omar": "1234",
         "elsa": "abcd",
@@ -405,7 +382,6 @@ def login(usuario: Usuario):
     }
 
     if usuarios_validos.get(usuario.username) == usuario.password:
-        # Reutilizamos session_id como token para ahora
         session_id = f"{usuario.username}--{str(uuid.uuid4())}"
         return {"session_id": session_id, "username": usuario.username}
     else:
@@ -454,49 +430,37 @@ def justificar_codigos(input: JustificacionInput):
         return {"anotaciones": anotaciones}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-    
-# Agregar después de los otros endpoints en tu main.py
 
 prompt_etiquetado = {
     "role": "system", 
     "content": "Eres un experto codificador de análisis cualitativo. Tu tarea es analizar párrafos de texto y asignarles códigos relevantes de una lista predefinida. Para cada párrafo, identifica qué códigos de la lista proporcionada son más relevantes. Un párrafo puede tener múltiples códigos si aplica. Responde únicamente con un JSON válido en este formato exacto: [{\"texto\": \"texto del párrafo\", \"codigos\": [\"codigo1\", \"codigo2\"]}, ...]"
 }
 
-# Definir el modelo UNA sola vez
 class EtiquetadoRequest(BaseModel):
     session_id: str
     codigos: List[str]
-    pagina: int = 1  # Página actual (1-based)
-    por_pagina: int = 20  # Segmentos por página
+    pagina: int = 1
+    por_pagina: int = 20
     temperature: float = 0.7
     max_tokens: Optional[int] = None
     top_p: float = 1.0
     frequency_penalty: float = 0.0
     presence_penalty: float = 0.0
 
-# Definir el prompt UNA sola vez
-prompt_etiquetado = {
-    "role": "system", 
-    "content": "Eres un experto codificador de análisis cualitativo. Tu tarea es analizar párrafos de texto y asignarles códigos relevantes de una lista predefinida. Para cada párrafo, identifica qué códigos de la lista proporcionada son más relevantes. Un párrafo puede tener múltiples códigos si aplica. Responde únicamente con un JSON válido en este formato exacto: [{\"texto\": \"texto del párrafo\", \"codigos\": [\"codigo1\", \"codigo2\"]}, ...]"
-}
-
-# Endpoint UNA sola vez
 @app.post("/etiquetar/")
 def etiquetar_texto(request: EtiquetadoRequest):
     try:
         session_id = request.session_id
         codigos_aprobados = request.codigos
-        pagina = max(1, request.pagina)  # Asegurar página >= 1
-        por_pagina = min(max(5, request.por_pagina), 50)  # 5-50 segmentos por página
+        pagina = max(1, request.pagina)
+        por_pagina = min(max(5, request.por_pagina), 50)
         
         if not session_id or not codigos_aprobados:
             raise HTTPException(status_code=400, detail="session_id y codigos son requeridos")
         
-        # Verificar que existan códigos aprobados
         if len(codigos_aprobados) == 0:
             raise HTTPException(status_code=400, detail="Debe proporcionar al menos un código aprobado")
         
-        # Cargar texto consolidado
         file_path = f"./archivos_consolidados/consolidado_{session_id}.txt"
         if not os.path.exists(file_path):
             raise HTTPException(status_code=404, detail="Archivo consolidado no encontrado. Complete los pasos 1 y 2 primero.")
@@ -507,11 +471,9 @@ def etiquetar_texto(request: EtiquetadoRequest):
         if not texto_completo.strip():
             raise HTTPException(status_code=400, detail="El archivo consolidado está vacío")
         
-        # Intentar cargar segmentos ya procesados
         session_data = load_session_data(session_id)
         segmentos_existentes = session_data.get("segmentos_codificados", [])
         
-        # Si no hay segmentos procesados, procesar todos
         if not segmentos_existentes:
             print("Procesando texto completo por primera vez...")
             segmentos_codificados = procesar_todo_el_texto(texto_completo, codigos_aprobados, request.temperature, request.max_tokens, request.top_p, request.frequency_penalty, request.presence_penalty)
@@ -520,15 +482,13 @@ def etiquetar_texto(request: EtiquetadoRequest):
         else:
             segmentos_codificados = segmentos_existentes
         
-        # Aplicar paginación
         total_segmentos = len(segmentos_codificados)
         inicio = (pagina - 1) * por_pagina
         fin = inicio + por_pagina
         
         segmentos_pagina = segmentos_codificados[inicio:fin]
-        total_paginas = (total_segmentos + por_pagina - 1) // por_pagina  # Ceiling division
+        total_paginas = (total_segmentos + por_pagina - 1) // por_pagina
         
-        # Estadísticas
         codigos_usados = list(set(c for s in segmentos_codificados for c in s["codigos"]))
         
         print(f"Página {pagina}/{total_paginas}: {len(segmentos_pagina)} segmentos")
@@ -558,18 +518,14 @@ def etiquetar_texto(request: EtiquetadoRequest):
         raise HTTPException(status_code=500, detail=f"Error interno del servidor: {str(e)}")
 
 def procesar_todo_el_texto(texto_completo: str, codigos_aprobados: List[str], temperature: float = 0.7, max_tokens: int = None, top_p: float = 1.0, frequency_penalty: float = 0.0, presence_penalty: float = 0.0) -> List[dict]:
-    """Procesa todo el texto sin límite de párrafos"""
-    
-    # Dividir por párrafos (usando doble salto de línea como separador)
     parrafos_raw = texto_completo.split('\n\n')
     parrafos = []
     
     for parrafo in parrafos_raw:
         parrafo = parrafo.strip()
-        if parrafo and len(parrafo.split()) > 10:  # Mínimo 10 palabras por párrafo
+        if parrafo and len(parrafo.split()) > 10:
             parrafos.append(parrafo)
     
-    # Si no hay párrafos suficientes, dividir por oraciones
     if len(parrafos) < 2:
         oraciones = [s.strip() for s in texto_completo.split('.') if s.strip() and len(s.split()) > 5]
         parrafos = []
@@ -577,7 +533,7 @@ def procesar_todo_el_texto(texto_completo: str, codigos_aprobados: List[str], te
         
         for oracion in oraciones:
             parrafo_actual += oracion + ". "
-            if len(parrafo_actual.split()) > 15:  # Grupos de ~15 palabras
+            if len(parrafo_actual.split()) > 15:
                 parrafos.append(parrafo_actual.strip())
                 parrafo_actual = ""
         
@@ -588,7 +544,6 @@ def procesar_todo_el_texto(texto_completo: str, codigos_aprobados: List[str], te
     
     segmentos_codificados = []
     
-    # Procesar cada párrafo (sin límite)
     for i, parrafo in enumerate(parrafos[:25]):
         try:
             prompt_usuario = f"""
@@ -606,7 +561,6 @@ def procesar_todo_el_texto(texto_completo: str, codigos_aprobados: List[str], te
             
             respuesta = call_azure_openai(prompt_usuario, 3, temperature=temperature, max_tokens=max_tokens, top_p=top_p, frequency_penalty=frequency_penalty, presence_penalty=presence_penalty)
             
-            # Intentar parsear JSON
             try:
                 resultado = json.loads(respuesta)
                 if isinstance(resultado, list) and len(resultado) > 0:
@@ -623,7 +577,6 @@ def procesar_todo_el_texto(texto_completo: str, codigos_aprobados: List[str], te
                         })
                         
             except json.JSONDecodeError:
-                # Fallback: buscar códigos mencionados
                 codigos_encontrados = []
                 respuesta_lower = respuesta.lower()
                 
@@ -651,20 +604,16 @@ from fastapi.responses import StreamingResponse
 
 @app.get("/exportar_csv/{session_id}")
 def exportar_segmentos_csv(session_id: str):
-    """Exporta los segmentos codificados a CSV para embeddings"""
     try:
-        # Cargar datos de la sesión
         session_data = load_session_data(session_id)
         segmentos_codificados = session_data.get("segmentos_codificados", [])
         
         if not segmentos_codificados:
             raise HTTPException(status_code=404, detail="No hay segmentos codificados para exportar")
         
-        # Crear CSV en memoria
         output = StringIO()
         writer = csv.writer(output, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         
-        # Encabezados
         writer.writerow([
             'id_segmento',
             'texto_segmento', 
@@ -673,18 +622,16 @@ def exportar_segmentos_csv(session_id: str):
             'longitud_texto'
         ])
         
-        # Datos
         for i, segmento in enumerate(segmentos_codificados, 1):
             codigos_str = '|'.join(segmento.get('codigos', []))
             writer.writerow([
                 i,
-                segmento.get('texto', '').replace('\n', ' ').replace('\r', ''),  # Limpiar saltos de línea
+                segmento.get('texto', '').replace('\n', ' ').replace('\r', ''),
                 codigos_str,
                 len(segmento.get('codigos', [])),
                 len(segmento.get('texto', ''))
             ])
         
-        # Preparar respuesta
         output.seek(0)
         response = StreamingResponse(
             io.StringIO(output.getvalue()),
@@ -711,7 +658,8 @@ def obtener_historial(session_id: str):
         with open(session_path, "r", encoding="utf-8") as f:
             session_data = json.load(f)
 
-        consolidado_path = f"./archivos_guardados/output_{session_id}.txt"
+        # CORRECTED: Read from archivos_consolidados instead of archivos_guardados
+        consolidado_path = f"./archivos_consolidados/consolidado_{session_id}.txt"
         texto_consolidado = ""
         if os.path.exists(consolidado_path):
             with open(consolidado_path, "r", encoding="utf-8") as f:
