@@ -59,6 +59,34 @@ prompt_agente_corrector_codigos = {
     )
 }
 
+
+
+prompt_agente_familias = {
+    "role": "system",
+    "content": (
+        "Eres un experto en análisis cualitativo. "
+        "Tu tarea es agrupar una lista de códigos en familias temáticas.\n\n"
+        "REGLAS:\n"
+        "- Debes usar SOLO los códigos proporcionados.\n"
+        "- Cada código debe pertenecer a UNA SOLA familia.\n"
+        "- No puede haber códigos repetidos en distintas familias.\n"
+        "- El nombre de la familia puede ser un término nuevo que generalice los códigos.\n"
+        "- Opcionalmente, puedes añadir una breve descripción de la familia.\n\n"
+        "FORMATO DE RESPUESTA (JSON ESTRICTO):\n"
+        "[\n"
+        "  {\n"
+        "    \"familia\": \"nombre_de_la_familia\",\n"
+        "    \"descripcion\": \"breve descripción de la familia\",\n"
+        "    \"codigos\": [\"codigo1\", \"codigo2\", \"codigo3\"]\n"
+        "  }\n"
+        "]\n\n"
+        "No devuelvas ningún texto fuera del JSON."
+    )
+}
+
+
+
+
 # Definir el tipo de estado
 class State(TypedDict):
     data: Annotated[list[str], operator.add]
@@ -107,6 +135,9 @@ def call_azure_openai(prompt: str, option: int, temperature: float = 0.7, max_to
             answer, tokens_used = run_prompt(client, prompt, prompt_agente_corrector_codigos, temperature=temperature, max_tokens=max_tokens, top_p=top_p, frequency_penalty=frequency_penalty, presence_penalty=presence_penalty)
         elif option == 3:
             answer, tokens_used = run_prompt(client, prompt, prompt_etiquetado, temperature=temperature, max_tokens=max_tokens, top_p=top_p, frequency_penalty=frequency_penalty, presence_penalty=presence_penalty)
+        elif option == 4:
+            # NUEVO: agrupación en familias
+            answer, tokens_used = run_prompt(client, prompt, prompt_agente_familias, temperature=temperature, max_tokens=max_tokens, top_p=top_p, frequency_penalty=frequency_penalty, presence_penalty=presence_penalty)
         else:
             raise ValueError(f"Opción no válida: {option}")
         return answer
@@ -219,6 +250,17 @@ class ValidacionInput(BaseModel):
 class ConsolidatedFileRequest(BaseModel):
     content: str
     session_id: str
+
+
+class FamiliasRequest(BaseModel):
+    codigos_aprobados: List[str]
+    temperature: float = 0.7
+    max_tokens: Optional[int] = None
+    top_p: float = 1.0
+    frequency_penalty: float = 0.0
+    presence_penalty: float = 0.0
+
+
 
 class Usuario(BaseModel):
     username: str
@@ -516,6 +558,102 @@ def etiquetar_texto(request: EtiquetadoRequest):
     except Exception as e:
         print(f"Error general en etiquetado: {e}")
         raise HTTPException(status_code=500, detail=f"Error interno del servidor: {str(e)}")
+    
+@app.post("/familias/")
+def generar_familias(request: FamiliasRequest):
+    try:
+        codigos_aprobados = [c.strip() for c in request.codigos_aprobados if c.strip()]
+        if not codigos_aprobados:
+            raise HTTPException(status_code=400, detail="Debe proporcionar al menos un código aprobado.")
+
+        # Construimos el prompt para el LLM
+        lista_codigos_str = "\n".join(f"- {c}" for c in codigos_aprobados)
+        prompt_usuario = f"""
+        Tienes la siguiente lista de códigos de análisis cualitativo:
+
+        {lista_codigos_str}
+
+        Agrúpalos en familias temáticas siguiendo estrictamente estas reglas:
+        1. Usa SOLO los códigos de la lista anterior.
+        2. Cada código debe pertenecer a UNA SOLA familia (sin solapamientos).
+        3. El nombre de cada familia puede ser una palabra o frase NUEVA que generalice los códigos.
+        4. Devuelve la respuesta en JSON válido, en el siguiente formato:
+
+        [
+          {{
+            "familia": "nombre_de_la_familia",
+            "descripcion": "breve descripción de la familia",
+            "codigos": ["codigo1", "codigo2"]
+          }}
+        ]
+        """
+
+        respuesta = call_azure_openai(
+            prompt_usuario,
+            4,  # opción para familias
+            temperature=request.temperature,
+            max_tokens=request.max_tokens,
+            top_p=request.top_p,
+            frequency_penalty=request.frequency_penalty,
+            presence_penalty=request.presence_penalty
+        )
+
+        # Intentar parsear el JSON devuelto
+        try:
+            familias = json.loads(respuesta)
+        except json.JSONDecodeError:
+            raise HTTPException(
+                status_code=500,
+                detail=f"El modelo no devolvió un JSON válido: {respuesta[:200]}"
+            )
+
+        if not isinstance(familias, list):
+            raise HTTPException(status_code=500, detail="El JSON de respuesta debe ser una lista de familias.")
+
+        # Post-procesamiento: asegurar que ningún código pertenezca a más de una familia
+        codigos_set = set(codigos_aprobados)
+        codigos_asignados = set()
+        familias_limpias = []
+
+        for fam in familias:
+            codigos_fam = fam.get("codigos", [])
+            if not isinstance(codigos_fam, list):
+                codigos_fam = []
+
+            codigos_unicos = []
+            for c in codigos_fam:
+                # Solo conservar códigos válidos y que no hayan sido asignados
+                if c in codigos_set and c not in codigos_asignados:
+                    codigos_unicos.append(c)
+                    codigos_asignados.add(c)
+
+            if codigos_unicos:
+                fam["codigos"] = codigos_unicos
+                # Nombre y descripción por si el modelo no los retorna bien
+                fam["familia"] = fam.get("familia", "Familia sin nombre")
+                fam["descripcion"] = fam.get("descripcion", "")
+                familias_limpias.append(fam)
+
+        # Códigos que quedaron sin asignar → los ponemos en una familia "Otros"
+        codigos_restantes = [c for c in codigos_aprobados if c not in codigos_asignados]
+        if codigos_restantes:
+            familias_limpias.append({
+                "familia": "Otros códigos",
+                "descripcion": "Códigos que no fueron agrupados claramente con otros.",
+                "codigos": codigos_restantes
+            })
+
+        return {
+            "familias": familias_limpias,
+            "total_familias": len(familias_limpias),
+            "total_codigos": len(codigos_aprobados)
+        }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error generando familias: {str(e)}")
+
 
 def procesar_todo_el_texto(texto_completo: str, codigos_aprobados: List[str], temperature: float = 0.7, max_tokens: int = None, top_p: float = 1.0, frequency_penalty: float = 0.0, presence_penalty: float = 0.0) -> List[dict]:
     parrafos_raw = texto_completo.split('\n\n')
@@ -678,3 +816,35 @@ def obtener_historial(session_id: str):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error al obtener historial: {str(e)}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
