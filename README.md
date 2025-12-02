@@ -4,9 +4,7 @@ Perfecto — aquí tienes el **README.md completo**, limpio, organizado y listo 
 
 # 📘 **README – QualiCode: AI-Assisted Qualitative Coding System**
 
-## 🇬🇧 **English Version**
 
-*(Spanish version included below)*
 
 ---
 
@@ -257,17 +255,6 @@ This system was developed as part of a master’s thesis on:
 
 ---
 
-# 🇪🇸 **Versión en Español**
-
----
-
-# **QualiCode: Sistema de Codificación Cualitativa Asistido por IA**
-
-*(Versión resumida en español – preguntar si deseas la versión completa traducida.)*
-
-QualiCode es un sistema basado en FastAPI que combina modelos de lenguaje, embeddings semánticos y agentes iterativos para asistir el análisis cualitativo.
-
-Incluye generación de códigos, refinamiento, etiquetado, creación de familias y comparación entre métodos tradicionales y clustering.
 
 
 
