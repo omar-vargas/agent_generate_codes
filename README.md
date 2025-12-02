@@ -269,20 +269,5 @@ QualiCode es un sistema basado en FastAPI que combina modelos de lenguaje, embed
 
 Incluye generación de códigos, refinamiento, etiquetado, creación de familias y comparación entre métodos tradicionales y clustering.
 
----
 
-Si quieres **la versión completa en español**, dímelo y la genero en el mismo formato.
 
----
-
-## ✔️ Fin del README.md
-
-Si deseas que genere:
-
-* El archivo **README.md** nuevamente como archivo descargable
-* Un archivo ZIP completo
-* Una versión corta
-* Una versión para artículo académico
-* Una versión para GitHub Pages
-
-…solo dímelo.
